@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+<meta charset="UTF-8">
+
+<title>POP Turismo</title>
+
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+<h1>Asistente Turístico</h1>
+
+<label>Idioma</label>
+
+<select id="idioma">
+
+<option>Español</option>
+
+<option>English</option>
+
+<option>Français</option>
+
+</select>
+
+<label>Presupuesto</label>
+
+<input id="presupuesto">
+
+<label>Intereses</label>
+
+<input id="intereses">
+
+<label>Tipo de viaje</label>
+
+<input id="tipo">
+
+<label>Días</label>
+
+<input id="dias">
+
+<button onclick="consultar()">
+
+Obtener recomendaciones
+
+</button>
+
+<pre id="respuesta"></pre>
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+
+</body>
+
+</html>

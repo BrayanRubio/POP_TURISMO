@@ -1,185 +1,144 @@
-from config import (
-    HOTELES_JSON,
-    RESTAURANTES_JSON,
-    ACTIVIDADES_JSON,
-    MAX_HOTELES,
-    MAX_RESTAURANTES,
-    MAX_ACTIVIDADES
-)
-
-from utilidades import (
-    cargar_json,
-    filtrar_ciudad,
-    filtrar_presupuesto,
-    seleccionar
-)
+from datetime import datetime
 
 
-# ==========================================
-# CARGAR BASES DE DATOS
-# ==========================================
+# ==========================================================
+# FUNCIONES AUXILIARES
+# ==========================================================
 
-hoteles_db = cargar_json(HOTELES_JSON)
-restaurantes_db = cargar_json(RESTAURANTES_JSON)
-actividades_db = cargar_json(ACTIVIDADES_JSON)
+def precio_valido(precio, presupuesto):
 
+    presupuesto = presupuesto.lower()
 
-# ==========================================
-# RECARGAR DATOS
-# ==========================================
+    if presupuesto == "económico":
+        return precio <= 200000
 
-def recargar():
+    elif presupuesto == "medio":
+        return 200000 < precio <= 500000
 
-    global hoteles_db
-    global restaurantes_db
-    global actividades_db
+    elif presupuesto == "alto":
+        return precio > 500000
 
-    hoteles_db = cargar_json(HOTELES_JSON)
-    restaurantes_db = cargar_json(RESTAURANTES_JSON)
-    actividades_db = cargar_json(ACTIVIDADES_JSON)
+    return True
 
 
-# ==========================================
-# HOTELES
-# ==========================================
+def disponible(item, fecha_inicio, fecha_fin):
 
-def buscar_hoteles(ciudad, presupuesto=None):
+    if not fecha_inicio or not fecha_fin:
+        return True
 
-    hoteles = filtrar_ciudad(hoteles_db, ciudad)
-
-    if presupuesto:
-
-        hoteles_presupuesto = filtrar_presupuesto(
-            hoteles,
-            presupuesto
-        )
-
-        if hoteles_presupuesto:
-            hoteles = hoteles_presupuesto
-
-    return seleccionar(
-        hoteles,
-        MAX_HOTELES
-    )
-
-
-# ==========================================
-# RESTAURANTES
-# ==========================================
-
-def buscar_restaurantes(ciudad):
-
-    restaurantes = filtrar_ciudad(
-        restaurantes_db,
-        ciudad
-    )
-
-    return seleccionar(
-        restaurantes,
-        MAX_RESTAURANTES
-    )
-
-
-# ==========================================
-# ACTIVIDADES
-# ==========================================
-
-def buscar_actividades(ciudad):
-
-    actividades = filtrar_ciudad(
-        actividades_db,
-        ciudad
-    )
-
-    return seleccionar(
-        actividades,
-        MAX_ACTIVIDADES
-    )
-
-
-# ==========================================
-# TODO EL PAQUETE
-# ==========================================
-
-def obtener_recomendaciones(ciudad, presupuesto=None):
-
-    return {
-
-        "hoteles": buscar_hoteles(
-            ciudad,
-            presupuesto
-        ),
-
-        "restaurantes": buscar_restaurantes(
-            ciudad
-        ),
-
-        "actividades": buscar_actividades(
-            ciudad
-        )
-
-    }
-
-
-# ==========================================
-# VALIDAR CIUDAD
-# ==========================================
-
-def ciudad_disponible(ciudad):
-
-    hoteles = filtrar_ciudad(
-        hoteles_db,
-        ciudad
-    )
-
-    restaurantes = filtrar_ciudad(
-        restaurantes_db,
-        ciudad
-    )
-
-    actividades = filtrar_ciudad(
-        actividades_db,
-        ciudad
-    )
+    disponibilidad = item.get("disponibilidad", [])
 
     return (
-        len(hoteles) > 0 or
-        len(restaurantes) > 0 or
-        len(actividades) > 0
+        fecha_inicio in disponibilidad and
+        fecha_fin in disponibilidad
     )
 
 
-# ==========================================
-# CONTADORES
-# ==========================================
+# ==========================================================
+# HOTELES
+# ==========================================================
 
-def total_hoteles():
+def buscar_hoteles(
+        hoteles,
+        ciudad,
+        presupuesto,
+        fecha_inicio,
+        fecha_fin):
 
-    return len(hoteles_db)
+    resultados = []
+
+    ciudad = ciudad.lower()
+
+    for hotel in hoteles:
+
+        if hotel["ciudad"].lower() != ciudad:
+            continue
+
+        if not precio_valido(
+                hotel["precio"],
+                presupuesto):
+            continue
+
+        if not disponible(
+                hotel,
+                fecha_inicio,
+                fecha_fin):
+            continue
+
+        resultados.append(hotel)
+
+    resultados.sort(
+        key=lambda x: (
+            x.get("calificacion", 0),
+            -x.get("precio", 0)
+        ),
+        reverse=True
+    )
+
+    return resultados[:3]
 
 
-def total_restaurantes():
+# ==========================================================
+# RESTAURANTES
+# ==========================================================
 
-    return len(restaurantes_db)
+def buscar_restaurantes(
+        restaurantes,
+        ciudad,
+        presupuesto):
+
+    ciudad = ciudad.lower()
+
+    resultados = []
+
+    for restaurante in restaurantes:
+
+        if restaurante["ciudad"].lower() != ciudad:
+            continue
+
+        resultados.append(restaurante)
+
+    resultados.sort(
+        key=lambda x: x.get("calificacion", 0),
+        reverse=True
+    )
+
+    return resultados[:3]
 
 
-def total_actividades():
+# ==========================================================
+# ACTIVIDADES
+# ==========================================================
 
-    return len(actividades_db)
+def buscar_actividades(
+        actividades,
+        ciudad,
+        interes):
 
+    ciudad = ciudad.lower()
 
-# ==========================================
-# ESTADÍSTICAS
-# ==========================================
+    interes = interes.lower()
 
-def estadisticas():
+    resultados = []
 
-    return {
+    for actividad in actividades:
 
-        "hoteles": total_hoteles(),
+        if actividad["ciudad"].lower() != ciudad:
+            continue
 
-        "restaurantes": total_restaurantes(),
+        categoria = actividad.get(
+            "categoria",
+            ""
+        ).lower()
 
-        "actividades": total_actividades()
+        if interes not in categoria:
+            continue
 
-    }
+        resultados.append(actividad)
+
+    resultados.sort(
+        key=lambda x: x.get("calificacion", 0),
+        reverse=True
+    )
+
+    return resultados[:3]

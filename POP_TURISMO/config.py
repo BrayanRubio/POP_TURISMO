@@ -1,97 +1,143 @@
+from openai import OpenAI
 import os
 
-# ==============================
-# CONFIGURACIÓN GENERAL
-# ==============================
 
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-
-DATA_DIR = os.path.join(BASE_DIR, "data")
-
-STATIC_DIR = os.path.join(BASE_DIR, "static")
-
-TEMPLATE_DIR = os.path.join(BASE_DIR, "templates")
+client = OpenAI(
+    api_key=os.getenv("OPENAI_API_KEY")
+)
 
 
-# ==============================
-# OPENAI
-# ==============================
-
-OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
-
-
-# ==============================
-# ARCHIVOS JSON
-# ==============================
-
-HOTELES_JSON = os.path.join(DATA_DIR, "hoteles.json")
-
-RESTAURANTES_JSON = os.path.join(DATA_DIR, "restaurantes.json")
-
-ACTIVIDADES_JSON = os.path.join(DATA_DIR, "actividades.json")
-
-CIUDADES_JSON = os.path.join(DATA_DIR, "ciudades.json")
-
-
-# ==============================
-# RECOMENDACIONES
-# ==============================
-
-MAX_HOTELES = 3
-
-MAX_RESTAURANTES = 5
-
-MAX_ACTIVIDADES = 5
-
-
-# ==============================
-# IDIOMAS
-# ==============================
+# ===============================================
+# IDIOMAS SOPORTADOS
+# ===============================================
 
 IDIOMAS = {
+    "es": "Spanish",
+    "en": "English",
+    "fr": "French",
+    "pt": "Portuguese",
+    "de": "German",
+    "it": "Italian"
+}
 
-    "Español": "es",
 
-    "English": "en",
+# ===============================================
+# MENSAJES DE RESPALDO
+# ===============================================
 
-    "Português": "pt",
+MENSAJES = {
 
-    "Français": "fr",
+    "es": "¡Bienvenido a POP Turismo! Hemos encontrado varias recomendaciones para tu viaje. Explora las opciones disponibles a continuación.",
 
-    "Deutsch": "de",
+    "en": "Welcome to POP Turismo! We have found several recommendations for your trip. Explore the available options below.",
 
-    "Italiano": "it"
+    "fr": "Bienvenue sur POP Turismo ! Nous avons trouvé plusieurs recommandations pour votre voyage. Découvrez-les ci-dessous.",
+
+    "pt": "Bem-vindo ao POP Turismo! Encontramos várias recomendações para sua viagem. Explore as opções abaixo.",
+
+    "de": "Willkommen bei POP Turismo! Wir haben mehrere Empfehlungen für Ihre Reise gefunden. Entdecken Sie die folgenden Optionen.",
+
+    "it": "Benvenuto su POP Turismo! Abbiamo trovato diversi suggerimenti per il tuo viaggio. Scopri le opzioni qui sotto."
 
 }
 
-IDIOMA_DEFAULT = "Español"
 
+# ===============================================
+# GENERAR MENSAJE
+# ===============================================
 
-# ==============================
-# MENSAJES
-# ==============================
+def generar_mensaje(
+    idioma,
+    ciudad,
+    tipo,
+    presupuesto,
+    dias,
+    viajeros,
+    transporte,
+    intereses,
+    hoteles,
+    restaurantes,
+    actividades
+):
 
-SALUDO = "¡Hola! Soy POP Turismo."
+    idioma_prompt = IDIOMAS.get(
+        idioma,
+        "Spanish"
+    )
 
-DESPEDIDA = "Gracias por utilizar POP Turismo. ¡Buen viaje!"
+    prompt = f"""
+You are an expert tourism assistant for an airport digital kiosk.
 
+The traveler selected the language:
 
-# ==============================
-# CLIMA
-# ==============================
+{idioma_prompt}
 
-USAR_CLIMA = False
+IMPORTANT RULES
 
+Respond ONLY in {idioma_prompt}.
 
-# ==============================
-# OPENAI
-# ==============================
+Write naturally.
 
-USAR_OPENAI = True
+Be friendly.
 
+Maximum 120 words.
 
-# ==============================
-# FALLBACK LOCAL
-# ==============================
+Do NOT use bullet points.
 
-USAR_RESPUESTA_LOCAL = True
+Do NOT create lists.
+
+Do NOT mention hotel names.
+
+Do NOT mention restaurant names.
+
+Do NOT mention activity names.
+
+The recommendations will be displayed visually below your message.
+
+Traveler information
+
+Destination: {ciudad}
+
+Travel type: {tipo}
+
+Budget: {presupuesto}
+
+Travel duration: {dias} days
+
+Travelers: {viajeros}
+
+Transportation: {transporte}
+
+Main interest: {intereses}
+
+The system found:
+
+{len(hoteles)} hotels
+
+{len(restaurantes)} restaurants
+
+{len(actividades)} tourist activities.
+
+Generate only one welcoming paragraph inviting the traveler to explore the recommendations shown below.
+"""
+
+    try:
+
+        respuesta = client.responses.create(
+
+            model="gpt-5",
+
+            input=prompt
+
+        )
+
+        return respuesta.output_text.strip()
+
+    except Exception as e:
+
+        print(f"Error OpenAI: {e}")
+
+        return MENSAJES.get(
+            idioma,
+            MENSAJES["es"]
+        )

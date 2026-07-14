@@ -7,6 +7,45 @@ client = OpenAI(
 )
 
 
+# ===============================================
+# IDIOMAS SOPORTADOS
+# ===============================================
+
+IDIOMAS = {
+    "es": "Spanish",
+    "en": "English",
+    "fr": "French",
+    "pt": "Portuguese",
+    "de": "German",
+    "it": "Italian"
+}
+
+
+# ===============================================
+# MENSAJES DE RESPALDO
+# ===============================================
+
+MENSAJES = {
+
+    "es": "¡Bienvenido a POP Turismo! Hemos encontrado varias recomendaciones para tu viaje. Explora las opciones disponibles a continuación.",
+
+    "en": "Welcome to POP Turismo! We have found several recommendations for your trip. Explore the available options below.",
+
+    "fr": "Bienvenue sur POP Turismo ! Nous avons trouvé plusieurs recommandations pour votre voyage. Découvrez-les ci-dessous.",
+
+    "pt": "Bem-vindo ao POP Turismo! Encontramos várias recomendações para sua viagem. Explore as opções abaixo.",
+
+    "de": "Willkommen bei POP Turismo! Wir haben mehrere Empfehlungen für Ihre Reise gefunden. Entdecken Sie die folgenden Optionen.",
+
+    "it": "Benvenuto su POP Turismo! Abbiamo trovato diversi suggerimenti per il tuo viaggio. Scopri le opzioni qui sotto."
+
+}
+
+
+# ===============================================
+# GENERAR MENSAJE
+# ===============================================
+
 def generar_mensaje(
     idioma,
     ciudad,
@@ -21,39 +60,65 @@ def generar_mensaje(
     actividades
 ):
 
+    idioma_prompt = IDIOMAS.get(
+        idioma,
+        "Spanish"
+    )
+
     prompt = f"""
-Eres un asesor turístico profesional.
+You are an expert tourism assistant for an airport digital kiosk.
 
-El usuario viajará con las siguientes características:
+The traveler selected the language:
 
-Ciudad: {ciudad}
-Idioma: {idioma}
-Tipo de viaje: {tipo}
-Presupuesto: {presupuesto}
-Duración: {dias} días
-Viajeros: {viajeros}
-Transporte: {transporte}
-Intereses: {intereses}
+{idioma_prompt}
 
-Encontré:
+IMPORTANT RULES
 
-- {len(hoteles)} hoteles
-- {len(restaurantes)} restaurantes
-- {len(actividades)} actividades
+Respond ONLY in {idioma_prompt}.
 
-Genera únicamente un mensaje de bienvenida.
+Write naturally.
 
-NO enumeres hoteles.
+Be friendly.
 
-NO enumeres restaurantes.
+Maximum 120 words.
 
-NO enumeres actividades.
+Do NOT use bullet points.
 
-NO hagas listas.
+Do NOT create lists.
 
-Solo escribe un párrafo amigable (máximo 120 palabras) invitando al usuario a revisar las recomendaciones que aparecerán a continuación.
+Do NOT mention hotel names.
 
-Respeta el idioma seleccionado.
+Do NOT mention restaurant names.
+
+Do NOT mention activity names.
+
+The recommendations will be displayed visually below your message.
+
+Traveler information
+
+Destination: {ciudad}
+
+Travel type: {tipo}
+
+Budget: {presupuesto}
+
+Travel duration: {dias} days
+
+Travelers: {viajeros}
+
+Transportation: {transporte}
+
+Main interest: {intereses}
+
+The system found:
+
+{len(hoteles)} hotels
+
+{len(restaurantes)} restaurants
+
+{len(actividades)} tourist activities.
+
+Generate only one welcoming paragraph inviting the traveler to explore the recommendations shown below.
 """
 
     try:
@@ -66,29 +131,13 @@ Respeta el idioma seleccionado.
 
         )
 
-        return respuesta.output_text
+        return respuesta.output_text.strip()
 
-    except Exception:
+    except Exception as e:
 
-        # Respaldo cuando la IA no esté disponible
+        print(f"Error OpenAI: {e}")
 
-        idiomas = {
-
-            "Español":
-                f"¡Bienvenido! Encontré varias recomendaciones para tu viaje a {ciudad}. A continuación podrás explorar hoteles, restaurantes y actividades seleccionadas según tus preferencias.",
-
-            "English":
-                f"Welcome! I found several recommendations for your trip to {ciudad}. Below you can explore hotels, restaurants and activities tailored to your preferences.",
-
-            "Français":
-                f"Bienvenue ! J'ai trouvé plusieurs recommandations pour votre voyage à {ciudad}. Vous pouvez découvrir ci-dessous des hôtels, restaurants et activités adaptés à vos préférences.",
-
-            "Português":
-                f"Bem-vindo! Encontrei várias recomendações para sua viagem a {ciudad}. A seguir você poderá explorar hotéis, restaurantes e atividades de acordo com suas preferências."
-
-        }
-
-        return idiomas.get(
+        return MENSAJES.get(
             idioma,
-            idiomas["Español"]
+            MENSAJES["es"]
         )

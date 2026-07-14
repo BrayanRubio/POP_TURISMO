@@ -1,151 +1,266 @@
-async function consultar() {
+const chat = document.getElementById("chat");
 
-    const chat = document.getElementById("chat");
+const typing = document.getElementById("typing");
 
-    const ciudad = document.getElementById("ciudad").value;
-    const idioma = document.getElementById("idioma").value;
-    const presupuesto = document.getElementById("presupuesto").value;
-    const intereses = document.getElementById("intereses").value;
-    const tipo = document.getElementById("tipo").value;
-    const dias = document.getElementById("dias").value;
-    const viajeros = document.getElementById("viajeros").value;
-    const transporte = document.getElementById("transporte").value;
 
-    if(ciudad==""){
-        alert("Ingrese un destino.");
-        return;
-    }
 
-    // MENSAJE DEL USUARIO
+function agregarUsuario(texto){
 
-    chat.innerHTML += `
-    <div class="message user">
+chat.innerHTML += `
 
-        <div class="bubble">
+<div class="mensaje usuario">
 
-            Quiero viajar a <b>${ciudad}</b> durante
-            <b>${dias}</b> días.
+<div class="burbuja">
 
-            Mi presupuesto es
-            <b>${presupuesto}</b>.
+${texto}
 
-            Me interesan:
+</div>
 
-            <b>${intereses}</b>
+<div class="avatar">
 
-        </div>
+<i class="bi bi-person-fill"></i>
 
-        <div class="avatar">
-            👤
-        </div>
+</div>
 
-    </div>
-    `;
+</div>
 
-    chat.scrollTop = chat.scrollHeight;
+`;
 
-    // ESCRIBIENDO
-
-    const typing = document.createElement("div");
-
-    typing.className="message bot";
-
-    typing.id="typing";
-
-    typing.innerHTML=`
-
-        <div class="avatar">
-            🤖
-        </div>
-
-        <div class="typing">
-
-            <span></span>
-            <span></span>
-            <span></span>
-
-        </div>
-
-    `;
-
-    chat.appendChild(typing);
-
-    chat.scrollTop=chat.scrollHeight;
-
-    // PETICIÓN
-
-    const respuesta = await fetch("/recommend",{
-
-        method:"POST",
-
-        headers:{
-            "Content-Type":"application/json"
-        },
-
-        body:JSON.stringify({
-
-            ciudad,
-            idioma,
-            presupuesto,
-            intereses,
-            tipo,
-            dias,
-            viajeros,
-            transporte
-
-        })
-
-    });
-
-    const datos = await respuesta.json();
-
-    document.getElementById("typing").remove();
-
-    escribirRespuesta(datos.respuesta);
+scrollFinal();
 
 }
-function escribirRespuesta(texto){
 
-    const chat=document.getElementById("chat");
 
-    const bloque=document.createElement("div");
 
-    bloque.className="message bot";
+function agregarBot(texto){
 
-    bloque.innerHTML=`
+chat.innerHTML += `
 
-        <div class="avatar">
+<div class="mensaje bot">
 
-            🤖
+<div class="avatar">
 
-        </div>
+<i class="bi bi-robot"></i>
 
-        <div class="bubble" id="respuestaActual"></div>
+</div>
 
-    `;
+<div class="burbuja">
 
-    chat.appendChild(bloque);
+${texto.replace(/\n/g,"<br>")}
 
-    const destino=document.getElementById("respuestaActual");
+</div>
 
-    let i=0;
+</div>
 
-    function escribir(){
+`;
 
-        if(i<texto.length){
+scrollFinal();
 
-            destino.innerHTML += texto.charAt(i);
+}
 
-            i++;
 
-            chat.scrollTop=chat.scrollHeight;
 
-            setTimeout(escribir,8);
+function scrollFinal(){
 
-        }
+chat.scrollTop=chat.scrollHeight;
 
-    }
+}
 
-    escribir();
+
+
+function mostrarTyping(){
+
+typing.style.display="flex";
+
+scrollFinal();
+
+}
+
+
+
+function ocultarTyping(){
+
+typing.style.display="none";
+
+}
+async function consultar(){
+
+
+const idioma=document.getElementById("idioma").value;
+
+const ciudad=document.getElementById("ciudad").value;
+
+const presupuesto=document.getElementById("presupuesto").value;
+
+const tipo=document.getElementById("tipo").value;
+
+const dias=document.getElementById("dias").value;
+
+const viajeros=document.getElementById("viajeros").value;
+
+const intereses=document.getElementById("intereses").value;
+
+const transporte=document.getElementById("transporte").value;
+
+const fecha_inicio=document.getElementById("fecha_inicio").value;
+
+const fecha_fin=document.getElementById("fecha_fin").value;
+
+
+
+if(ciudad==""){
+
+alert("Seleccione una ciudad.");
+
+return;
+
+}
+
+
+
+agregarUsuario(
+
+`Quiero viajar a <b>${ciudad}</b> durante ${dias} días.
+Mi presupuesto es ${presupuesto}.`
+
+);
+
+
+
+mostrarTyping();
+
+
+
+try{
+
+const response=await fetch("/recommend",{
+
+method:"POST",
+
+headers:{
+
+"Content-Type":"application/json"
+
+},
+
+body:JSON.stringify({
+
+idioma,
+
+ciudad,
+
+presupuesto,
+
+tipo,
+
+dias,
+
+viajeros,
+
+intereses,
+
+transporte,
+
+fecha_inicio,
+
+fecha_fin
+
+})
+
+});
+
+
+
+const data=await response.json();
+
+
+
+ocultarTyping();
+
+
+
+agregarBot(data.respuesta);
+
+}
+
+catch(error){
+
+ocultarTyping();
+
+agregarBot(
+
+"⚠ Ocurrió un error al consultar el servidor."
+
+);
+
+}
+
+}
+function limpiarChat(){
+
+chat.innerHTML=`
+
+<div class="mensaje bot">
+
+<div class="avatar">
+
+<i class="bi bi-robot"></i>
+
+</div>
+
+<div class="burbuja">
+
+<h4>
+
+👋 Bienvenido nuevamente
+
+</h4>
+
+<p>
+
+Soy POP Turismo.
+
+Estoy listo para ayudarte a planear tu viaje.
+
+</p>
+
+</div>
+
+</div>
+
+`;
+
+}
+async function descargarPDF(){
+
+const {jsPDF}=window.jspdf;
+
+const pdf=new jsPDF();
+
+pdf.setFont("helvetica");
+
+pdf.setFontSize(16);
+
+pdf.text("POP Turismo",20,20);
+
+pdf.setFontSize(12);
+
+pdf.text(
+
+chat.innerText,
+
+20,
+
+35,
+
+{
+
+maxWidth:170
+
+}
+
+);
+
+pdf.save("POP_Turismo.pdf");
 
 }

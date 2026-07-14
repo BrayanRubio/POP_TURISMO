@@ -1,46 +1,79 @@
-from buscador import obtener_recomendaciones, ciudad_disponible
-from generador import generar_guia
+import json
+import os
+
+from buscador import (
+    buscar_hoteles,
+    buscar_restaurantes,
+    buscar_actividades
+)
+
+from generador import generar_mensaje
+
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+RUTA_HOTELES = os.path.join(BASE_DIR, "data", "hoteles.json")
+RUTA_RESTAURANTES = os.path.join(BASE_DIR, "data", "restaurantes.json")
+RUTA_ACTIVIDADES = os.path.join(BASE_DIR, "data", "actividades.json")
+
+
+def cargar_json(ruta):
+
+    with open(ruta, encoding="utf-8") as archivo:
+        return json.load(archivo)
 
 
 def generar_recomendacion(datos):
 
-    # ===============================
-    # DATOS DEL USUARIO
-    # ===============================
-
-    ciudad = datos.get("ciudad", "").strip()
-
     idioma = datos.get("idioma", "Español")
 
-    presupuesto = datos.get("presupuesto", "")
+    ciudad = datos.get("ciudad", "")
 
-    intereses = datos.get("intereses", "")
+    presupuesto = datos.get("presupuesto", "Medio")
 
     tipo = datos.get("tipo", "")
 
-    dias = datos.get("dias", "")
+    intereses = datos.get("intereses", "")
 
-    viajeros = datos.get("viajeros", "")
+    dias = int(datos.get("dias", 1))
+
+    viajeros = int(datos.get("viajeros", 1))
 
     transporte = datos.get("transporte", "")
 
-    # ===============================
-    # VALIDACIONES
-    # ===============================
+    fecha_inicio = datos.get("fecha_inicio", "")
 
-    if ciudad == "":
+    fecha_fin = datos.get("fecha_fin", "")
 
-        return "⚠ Debes seleccionar una ciudad."
 
-    if not ciudad_disponible(ciudad):
 
-        return f"No encontré información turística disponible para {ciudad}."
+    hoteles_bd = cargar_json(RUTA_HOTELES)
 
-    # ===============================
-    # CONSULTAR BASE LOCAL
-    # ===============================
+    restaurantes_bd = cargar_json(RUTA_RESTAURANTES)
 
-    recomendaciones = obtener_recomendaciones(
+    actividades_bd = cargar_json(RUTA_ACTIVIDADES)
+
+
+
+    hoteles = buscar_hoteles(
+
+        hoteles_bd,
+
+        ciudad,
+
+        presupuesto,
+
+        fecha_inicio,
+
+        fecha_fin
+
+    )
+
+
+
+    restaurantes = buscar_restaurantes(
+
+        restaurantes_bd,
 
         ciudad,
 
@@ -48,33 +81,37 @@ def generar_recomendacion(datos):
 
     )
 
-    hoteles = recomendaciones["hoteles"]
 
-    restaurantes = recomendaciones["restaurantes"]
 
-    actividades = recomendaciones["actividades"]
+    actividades = buscar_actividades(
 
-    # ===============================
-    # GENERAR RESPUESTA
-    # ===============================
+        actividades_bd,
 
-    respuesta = generar_guia(
+        ciudad,
 
-        ciudad=ciudad,
+        intereses
+
+    )
+
+
+
+    mensaje = generar_mensaje(
 
         idioma=idioma,
 
-        presupuesto=presupuesto,
-
-        intereses=intereses,
+        ciudad=ciudad,
 
         tipo=tipo,
+
+        presupuesto=presupuesto,
 
         dias=dias,
 
         viajeros=viajeros,
 
         transporte=transporte,
+
+        intereses=intereses,
 
         hoteles=hoteles,
 
@@ -84,4 +121,16 @@ def generar_recomendacion(datos):
 
     )
 
-    return respuesta
+
+
+    return {
+
+        "mensaje": mensaje,
+
+        "hoteles": hoteles,
+
+        "restaurantes": restaurantes,
+
+        "actividades": actividades
+
+    }

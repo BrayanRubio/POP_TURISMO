@@ -5,18 +5,10 @@ from motor import generar_recomendacion
 app = Flask(__name__)
 
 
-# ==========================================
-# PÁGINA PRINCIPAL
-# ==========================================
-
 @app.route("/")
-def index():
+def inicio():
     return render_template("index.html")
 
-
-# ==========================================
-# RECOMENDADOR
-# ==========================================
 
 @app.route("/recommend", methods=["POST"])
 def recommend():
@@ -25,52 +17,33 @@ def recommend():
 
         datos = request.get_json()
 
-        respuesta = generar_recomendacion(datos)
+        resultado = generar_recomendacion(datos)
 
         return jsonify({
+
             "success": True,
-            "respuesta": respuesta
+
+            "mensaje": resultado["mensaje"],
+
+            "hoteles": resultado["hoteles"],
+
+            "restaurantes": resultado["restaurantes"],
+
+            "actividades": resultado["actividades"]
+
         })
 
     except Exception as e:
 
         return jsonify({
+
             "success": False,
-            "respuesta": "Ha ocurrido un error.",
+
             "error": str(e)
-        }), 500
+
+        }),500
 
 
-# ==========================================
-# HEALTH CHECK
-# ==========================================
+if __name__=="__main__":
 
-@app.route("/health")
-def health():
-
-    return jsonify({
-
-        "status": "ok",
-
-        "app": "POP Turismo",
-
-        "version": "2.0"
-
-    })
-
-
-# ==========================================
-# MAIN
-# ==========================================
-
-if __name__ == "__main__":
-
-    app.run(
-
-        host="0.0.0.0",
-
-        port=5000,
-
-        debug=True
-
-    )
+    app.run(debug=True)

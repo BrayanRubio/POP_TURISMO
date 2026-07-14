@@ -1,180 +1,60 @@
 from openai import OpenAI
-from config import (
-    OPENAI_API_KEY,
-    USAR_OPENAI,
-    IDIOMA_DEFAULT
+import os
+
+
+client = OpenAI(
+    api_key=os.getenv("OPENAI_API_KEY")
 )
 
-from utilidades import (
-    lista_texto,
-    respuesta_local
-)
 
-# ==========================================
-# CLIENTE OPENAI
-# ==========================================
-
-client = None
-
-if USAR_OPENAI and OPENAI_API_KEY:
-
-    try:
-        client = OpenAI(api_key=OPENAI_API_KEY)
-    except:
-        client = None
-
-
-# ==========================================
-# PROMPT
-# ==========================================
-
-def construir_prompt(
-    ciudad,
+def generar_mensaje(
     idioma,
-    presupuesto,
-    intereses,
+    ciudad,
     tipo,
+    presupuesto,
     dias,
     viajeros,
     transporte,
+    intereses,
     hoteles,
     restaurantes,
     actividades
 ):
 
-    hoteles_txt = lista_texto(hoteles)
+    prompt = f"""
+Eres un asesor turístico profesional.
 
-    restaurantes_txt = lista_texto(restaurantes)
+El usuario viajará con las siguientes características:
 
-    actividades_txt = lista_texto(actividades)
+Ciudad: {ciudad}
+Idioma: {idioma}
+Tipo de viaje: {tipo}
+Presupuesto: {presupuesto}
+Duración: {dias} días
+Viajeros: {viajeros}
+Transporte: {transporte}
+Intereses: {intereses}
 
-    return f"""
-Eres POP Turismo.
+Encontré:
 
-Eres un guía turístico profesional.
+- {len(hoteles)} hoteles
+- {len(restaurantes)} restaurantes
+- {len(actividades)} actividades
 
-NO inventes información.
+Genera únicamente un mensaje de bienvenida.
 
-Utiliza EXCLUSIVAMENTE los datos suministrados.
+NO enumeres hoteles.
 
-Destino:
+NO enumeres restaurantes.
 
-{ciudad}
+NO enumeres actividades.
 
-Idioma:
+NO hagas listas.
 
-{idioma}
+Solo escribe un párrafo amigable (máximo 120 palabras) invitando al usuario a revisar las recomendaciones que aparecerán a continuación.
 
-Tipo de viaje:
-
-{tipo}
-
-Presupuesto:
-
-{presupuesto}
-
-Intereses:
-
-{intereses}
-
-Duración:
-
-{dias} días
-
-Viajeros:
-
-{viajeros}
-
-Transporte:
-
-{transporte}
-
-================================
-
-HOTELES
-
-{hoteles_txt}
-
-================================
-
-RESTAURANTES
-
-{restaurantes_txt}
-
-================================
-
-ACTIVIDADES
-
-{actividades_txt}
-
-================================
-
-Construye una guía turística elegante.
-
-No escribas tablas.
-
-No escribas listas largas.
-
-Escribe como si conversarás con el turista.
-
-Divide la respuesta por secciones usando emojis.
-
-Incluye:
-
-👋 Bienvenida
-
-🏨 Hospedaje
-
-🍽 Gastronomía
-
-🎯 Actividades
-
-🚖 Transporte
-
-🌤 Clima
-
-💡 Consejos
-
-🎉 Despedida
-
-Toda la respuesta debe escribirse en {idioma}.
+Respeta el idioma seleccionado.
 """
-
-
-# ==========================================
-# IA
-# ==========================================
-
-def generar_con_openai(
-    ciudad,
-    idioma,
-    presupuesto,
-    intereses,
-    tipo,
-    dias,
-    viajeros,
-    transporte,
-    hoteles,
-    restaurantes,
-    actividades
-):
-
-    if client is None:
-        return None
-
-    prompt = construir_prompt(
-        ciudad,
-        idioma,
-        presupuesto,
-        intereses,
-        tipo,
-        dias,
-        viajeros,
-        transporte,
-        hoteles,
-        restaurantes,
-        actividades
-    )
 
     try:
 
@@ -182,9 +62,7 @@ def generar_con_openai(
 
             model="gpt-5",
 
-            input=prompt,
-
-            max_output_tokens=1800
+            input=prompt
 
         )
 
@@ -192,107 +70,25 @@ def generar_con_openai(
 
     except Exception:
 
-        return None
+        # Respaldo cuando la IA no esté disponible
 
+        idiomas = {
 
-# ==========================================
-# LOCAL
-# ==========================================
+            "Español":
+                f"¡Bienvenido! Encontré varias recomendaciones para tu viaje a {ciudad}. A continuación podrás explorar hoteles, restaurantes y actividades seleccionadas según tus preferencias.",
 
-def generar_local(
-    ciudad,
-    hoteles,
-    restaurantes,
-    actividades
-):
+            "English":
+                f"Welcome! I found several recommendations for your trip to {ciudad}. Below you can explore hotels, restaurants and activities tailored to your preferences.",
 
-    return respuesta_local(
+            "Français":
+                f"Bienvenue ! J'ai trouvé plusieurs recommandations pour votre voyage à {ciudad}. Vous pouvez découvrir ci-dessous des hôtels, restaurants et activités adaptés à vos préférences.",
 
-        ciudad,
+            "Português":
+                f"Bem-vindo! Encontrei várias recomendações para sua viagem a {ciudad}. A seguir você poderá explorar hotéis, restaurantes e atividades de acordo com suas preferências."
 
-        hoteles,
+        }
 
-        restaurantes,
-
-        actividades
-
-    )
-
-
-# ==========================================
-# PRINCIPAL
-# ==========================================
-
-def generar_guia(
-
-    ciudad,
-
-    idioma=IDIOMA_DEFAULT,
-
-    presupuesto="",
-
-    intereses="",
-
-    tipo="",
-
-    dias="",
-
-    viajeros="",
-
-    transporte="",
-
-    hoteles=None,
-
-    restaurantes=None,
-
-    actividades=None
-
-):
-
-    hoteles = hoteles or []
-
-    restaurantes = restaurantes or []
-
-    actividades = actividades or []
-
-    texto = generar_con_openai(
-
-        ciudad,
-
-        idioma,
-
-        presupuesto,
-
-        intereses,
-
-        tipo,
-
-        dias,
-
-        viajeros,
-
-        transporte,
-
-        hoteles,
-
-        restaurantes,
-
-        actividades
-
-    )
-
-    if texto:
-
-        return texto
-
-    return generar_local(
-
-        ciudad,
-
-        hoteles,
-
-        restaurantes,
-
-        actividades
-
-    )
+        return idiomas.get(
+            idioma,
+            idiomas["Español"]
+        )

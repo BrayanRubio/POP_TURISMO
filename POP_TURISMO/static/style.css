@@ -1,308 +1,311 @@
-/*=========================
-POP TURISMO V2
-==========================*/
+/* =======================================================
+POP TURISMO
+======================================================= */
 
 *{
     margin:0;
     padding:0;
     box-sizing:border-box;
-}
-
-:root{
-
-    --azul:#0f4c81;
-    --verde:#2bb673;
-    --blanco:#ffffff;
-    --gris:#eef3f8;
-    --gris2:#dbe4ec;
-    --texto:#263238;
-    --sombra:0 10px 35px rgba(0,0,0,.12);
-
+    font-family:'Poppins',sans-serif;
 }
 
 body{
 
-    font-family:'Poppins',sans-serif;
-    background:#edf2f7;
     overflow:hidden;
-    color:var(--texto);
+
+    background:#eef3f8;
 
 }
 
-/***************************
+/* =======================================================
 FONDO
-****************************/
+======================================================= */
 
-body::before{
-
-    content:"";
+.background{
 
     position:fixed;
 
-    width:700px;
-    height:700px;
+    width:100%;
 
-    background:linear-gradient(
-        120deg,
-        #00c6ff,
-        #0072ff
+    height:100%;
+
+    background:
+    linear-gradient(
+        135deg,
+        #0F4C81 0%,
+        #1E88E5 45%,
+        #00ACC1 100%
     );
 
-    border-radius:50%;
-
-    top:-250px;
-    right:-200px;
-
-    opacity:.15;
+    z-index:-2;
 
 }
 
-body::after{
+.background::before{
 
     content:"";
 
-    position:fixed;
+    position:absolute;
 
-    width:500px;
-    height:500px;
+    width:600px;
 
-    background:#2bb673;
+    height:600px;
+
+    background:rgba(255,255,255,.08);
 
     border-radius:50%;
 
-    bottom:-180px;
-    left:-150px;
+    top:-200px;
 
-    opacity:.12;
-
-}
-
-/***************************
-LAYOUT
-****************************/
-
-.app{
-
-    display:flex;
-
-    width:100vw;
-    height:100vh;
+    left:-100px;
 
 }
 
-/***************************
-SIDEBAR
-****************************/
+.background::after{
 
-.sidebar{
+    content:"";
 
-    width:360px;
+    position:absolute;
 
-    background:white;
+    width:700px;
 
-    box-shadow:var(--sombra);
+    height:700px;
+
+    background:rgba(255,255,255,.05);
+
+    border-radius:50%;
+
+    bottom:-250px;
+
+    right:-150px;
+
+}
+
+/* =======================================================
+PANELES
+======================================================= */
+
+.panel-left{
 
     padding:35px;
 
-    overflow:auto;
+}
 
-    z-index:2;
+.panel-right{
+
+    padding:30px;
 
 }
 
-/***************************
+/* =======================================================
 LOGO
-****************************/
+======================================================= */
+
+.logo-area{
+
+    text-align:center;
+
+    margin-bottom:30px;
+
+}
 
 .logo{
 
-    display:flex;
+    width:130px;
 
-    align-items:center;
-
-    gap:18px;
-
-    margin-bottom:35px;
+    margin-bottom:15px;
 
 }
 
-.logo i{
-
-    font-size:42px;
-
-    color:var(--azul);
-
-}
-
-.logo h1{
-
-    font-size:28px;
-
-    font-weight:700;
-
-}
-
-.logo span{
-
-    color:#777;
-
-}
-
-/***************************
-FORMULARIO
-****************************/
-
-.form-section{
-
-    display:flex;
-
-    flex-direction:column;
-
-}
-
-.form-section h2{
-
-    margin-bottom:20px;
-
-    color:var(--azul);
-
-}
-
-.form-section label{
-
-    margin-top:18px;
-
-    margin-bottom:8px;
-
-    font-weight:600;
-
-}
-
-.form-section input,
-.form-section select{
-
-    padding:14px;
-
-    border-radius:12px;
-
-    border:1px solid #d5dce4;
-
-    background:#fafafa;
-
-    font-size:15px;
-
-    transition:.3s;
-
-}
-
-.form-section input:focus,
-.form-section select:focus{
-
-    outline:none;
-
-    border:1px solid var(--azul);
-
-    background:white;
-
-}
-
-.form-section button{
-
-    margin-top:30px;
-
-    background:linear-gradient(
-    90deg,
-    var(--azul),
-    #1e88e5);
+.logo-area h2{
 
     color:white;
 
+    font-weight:700;
+
+    margin-bottom:8px;
+
+}
+
+.logo-area p{
+
+    color:white;
+
+    opacity:.9;
+
+}
+
+/* =======================================================
+FORMULARIO
+======================================================= */
+
+.formulario{
+
     border:none;
 
-    padding:18px;
+    border-radius:25px;
 
-    border-radius:15px;
+    padding:30px;
 
-    cursor:pointer;
+    background:rgba(255,255,255,.95);
 
-    font-size:17px;
+    backdrop-filter:blur(20px);
+
+    box-shadow:
+
+        0 20px 60px rgba(0,0,0,.18);
+
+}
+
+.form-label{
 
     font-weight:600;
 
-    transition:.3s;
+    color:#37474F;
 
 }
 
-.form-section button:hover{
+.form-control{
 
-    transform:translateY(-3px);
+    border-radius:12px;
 
-    box-shadow:0 10px 25px rgba(30,136,229,.35);
+    height:48px;
 
 }
-/***************************
+
+.form-select{
+
+    border-radius:12px;
+
+    height:48px;
+
+}
+
+.form-control:focus{
+
+    box-shadow:0 0 0 .25rem rgba(30,136,229,.2);
+
+}
+
+.form-select:focus{
+
+    box-shadow:0 0 0 .25rem rgba(30,136,229,.2);
+
+}
+
+/* =======================================================
 CHAT
-****************************/
+======================================================= */
 
 .chat-container{
 
-    flex:1;
+    height:92vh;
+
+    background:rgba(255,255,255,.95);
+
+    backdrop-filter:blur(25px);
+
+    border-radius:25px;
+
+    overflow:hidden;
+
+    box-shadow:0 20px 60px rgba(0,0,0,.20);
 
     display:flex;
 
     flex-direction:column;
 
-    height:100vh;
-
-    background:#f5f7fb;
-
 }
+
+
+/* =======================================================
+HEADER
+======================================================= */
 
 .chat-header{
 
-    height:80px;
+    height:90px;
 
     background:white;
 
-    display:flex;
-
-    align-items:center;
-
-    justify-content:space-between;
-
-    padding:0 35px;
-
-    box-shadow:0 3px 15px rgba(0,0,0,.08);
-
-    z-index:5;
-
-}
-
-.header-left{
+    border-bottom:1px solid #ECEFF1;
 
     display:flex;
 
     align-items:center;
 
-    gap:15px;
+    padding:25px;
+
+    gap:20px;
 
 }
 
-.header-left i{
+.chat-avatar{
+
+    width:60px;
+
+    height:60px;
+
+    border-radius:50%;
+
+    background:linear-gradient(135deg,#1E88E5,#00ACC1);
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    color:white;
 
     font-size:28px;
 
-    color:var(--verde);
-
 }
 
-.header-left span{
+.chat-header h4{
 
-    font-size:22px;
+    margin:0;
 
     font-weight:700;
 
 }
+
+.chat-header small{
+
+    color:#78909C;
+
+}
+
+.estado{
+
+    margin-left:auto;
+
+    color:#607D8B;
+
+    font-weight:500;
+
+}
+
+.online{
+
+    width:12px;
+
+    height:12px;
+
+    background:#43A047;
+
+    display:inline-block;
+
+    border-radius:50%;
+
+    margin-right:6px;
+
+}
+
+
+/* =======================================================
+BODY
+======================================================= */
 
 .chat-body{
 
@@ -310,66 +313,86 @@ CHAT
 
     overflow-y:auto;
 
-    padding:40px;
+    padding:35px;
 
-    display:flex;
-
-    flex-direction:column;
-
-    gap:25px;
+    background:#F7F9FC;
 
 }
 
+
+/* =======================================================
+SCROLL
+======================================================= */
+
 .chat-body::-webkit-scrollbar{
 
-    width:8px;
+    width:10px;
 
 }
 
 .chat-body::-webkit-scrollbar-thumb{
 
-    background:#cfd8dc;
+    background:#B0BEC5;
 
     border-radius:20px;
 
 }
-/***************************
-MENSAJES
-****************************/
 
-.message{
+.chat-body::-webkit-scrollbar-track{
 
-    display:flex;
-
-    gap:15px;
-
-    animation:fade .35s ease;
+    background:transparent;
 
 }
 
-.message.user{
+
+/* =======================================================
+MENSAJES
+======================================================= */
+
+.mensaje{
+
+    display:flex;
+
+    margin-bottom:30px;
+
+    animation:aparecer .4s ease;
+
+}
+
+.mensaje.usuario{
 
     justify-content:flex-end;
 
 }
 
+.mensaje.bot{
+
+    justify-content:flex-start;
+
+}
+
+
+/* =======================================================
+AVATAR
+======================================================= */
+
 .avatar{
 
-    width:55px;
+    width:50px;
 
-    height:55px;
+    height:50px;
 
     border-radius:50%;
 
     display:flex;
 
-    align-items:center;
-
     justify-content:center;
 
-    color:white;
+    align-items:center;
 
     font-size:22px;
+
+    color:white;
 
     flex-shrink:0;
 
@@ -377,72 +400,171 @@ MENSAJES
 
 .bot .avatar{
 
-    background:#2bb673;
+    background:#1E88E5;
+
+    margin-right:15px;
 
 }
 
-.user .avatar{
+.usuario .avatar{
 
-    background:#1565c0;
+    background:#43A047;
+
+    margin-left:15px;
+
+    order:2;
 
 }
 
-.bubble{
 
-    max-width:75%;
+/* =======================================================
+BURBUJAS
+======================================================= */
 
-    padding:22px;
+.burbuja{
 
-    border-radius:18px;
+    max-width:78%;
 
-    line-height:1.8;
+    padding:20px;
+
+    border-radius:20px;
+
+    line-height:1.7;
 
     font-size:15px;
 
     white-space:pre-line;
 
-    box-shadow:0 8px 25px rgba(0,0,0,.08);
+    box-shadow:0 5px 20px rgba(0,0,0,.08);
 
 }
 
-.bot .bubble{
+.bot .burbuja{
 
     background:white;
 
+    color:#37474F;
+
+    border-top-left-radius:6px;
+
 }
 
-.user .bubble{
+.usuario .burbuja{
 
-    background:#1565c0;
+    background:linear-gradient(135deg,#1E88E5,#1976D2);
+
+    color:white;
+
+    border-top-right-radius:6px;
+
+}
+
+
+/* =======================================================
+TÍTULOS
+======================================================= */
+
+.burbuja h5{
+
+    margin-bottom:12px;
+
+    font-weight:700;
+
+}
+
+
+/* =======================================================
+LINKS
+======================================================= */
+
+.burbuja a{
+
+    color:#1565C0;
+
+    text-decoration:none;
+
+}
+
+.usuario .burbuja a{
 
     color:white;
 
 }
-/***************************
-LOADER
-****************************/
 
-.typing{
 
-    display:flex;
+/* =======================================================
+FOOTER
+======================================================= */
 
-    gap:6px;
+.chat-footer{
 
-    align-items:center;
-
-    padding:18px 24px;
+    padding:20px;
 
     background:white;
 
-    border-radius:18px;
+    border-top:1px solid #ECEFF1;
 
-    width:85px;
+    display:flex;
 
-    box-shadow:0 8px 25px rgba(0,0,0,.08);
+    gap:15px;
 
 }
 
-.typing span{
+
+/* =======================================================
+BOTONES
+======================================================= */
+
+.btn-primary{
+
+    background:#1565C0;
+
+    border:none;
+
+}
+
+.btn-primary:hover{
+
+    background:#0D47A1;
+
+}
+
+.btn-success{
+
+    border:none;
+
+}
+/* =======================================================
+ANIMACIÓN ESCRIBIENDO
+======================================================= */
+
+.typing{
+
+    display:none;
+
+    align-items:center;
+
+    margin:20px 35px;
+
+}
+
+.typing-box{
+
+    background:white;
+
+    padding:18px 24px;
+
+    border-radius:20px;
+
+    display:flex;
+
+    gap:8px;
+
+    box-shadow:0 5px 20px rgba(0,0,0,.08);
+
+}
+
+.typing-box span{
 
     width:10px;
 
@@ -450,181 +572,374 @@ LOADER
 
     border-radius:50%;
 
-    background:#999;
+    background:#1E88E5;
 
-    animation:loading 1.2s infinite;
+    animation:typing 1.2s infinite;
 
 }
 
-.typing span:nth-child(2){
+.typing-box span:nth-child(2){
 
     animation-delay:.2s;
 
 }
 
-.typing span:nth-child(3){
+.typing-box span:nth-child(3){
 
     animation-delay:.4s;
 
 }
 
-@keyframes loading{
 
-0%{
+/* =======================================================
+TARJETAS
+======================================================= */
 
-transform:translateY(0);
+.card-recomendacion{
 
-opacity:.5;
+    background:white;
 
-}
+    border-radius:20px;
 
-50%{
+    padding:20px;
 
-transform:translateY(-8px);
+    margin-top:20px;
 
-opacity:1;
+    box-shadow:0 10px 30px rgba(0,0,0,.08);
 
-}
+    transition:.3s;
 
-100%{
-
-transform:translateY(0);
-
-opacity:.5;
+    border:1px solid #ECEFF1;
 
 }
 
+.card-recomendacion:hover{
+
+    transform:translateY(-6px);
+
+    box-shadow:0 20px 40px rgba(0,0,0,.15);
+
 }
-/***************************
+
+
+/* =======================================================
+IMAGEN
+======================================================= */
+
+.card-imagen{
+
+    width:100%;
+
+    height:200px;
+
+    object-fit:cover;
+
+    border-radius:15px;
+
+    margin-bottom:18px;
+
+}
+
+
+/* =======================================================
+TÍTULO
+======================================================= */
+
+.card-titulo{
+
+    font-size:22px;
+
+    font-weight:700;
+
+    color:#263238;
+
+}
+
+
+/* =======================================================
+ESTRELLAS
+======================================================= */
+
+.estrellas{
+
+    color:#FFC107;
+
+    margin:8px 0;
+
+    font-size:18px;
+
+}
+
+
+/* =======================================================
+INFO
+======================================================= */
+
+.info{
+
+    color:#546E7A;
+
+    margin:8px 0;
+
+    line-height:1.7;
+
+}
+
+.info i{
+
+    color:#1565C0;
+
+    margin-right:8px;
+
+}
+
+
+/* =======================================================
+BOTONES
+======================================================= */
+
+.botones{
+
+    margin-top:18px;
+
+    display:flex;
+
+    flex-wrap:wrap;
+
+    gap:12px;
+
+}
+
+.btn-whatsapp{
+
+    background:#25D366;
+
+    color:white;
+
+    border:none;
+
+    border-radius:12px;
+
+    padding:10px 18px;
+
+    transition:.3s;
+
+}
+
+.btn-whatsapp:hover{
+
+    background:#1EBE5A;
+
+    transform:scale(1.05);
+
+}
+
+.btn-mapa{
+
+    background:#1565C0;
+
+    color:white;
+
+    border:none;
+
+    border-radius:12px;
+
+    padding:10px 18px;
+
+}
+
+.btn-mapa:hover{
+
+    background:#0D47A1;
+
+}
+
+.btn-web{
+
+    background:#00ACC1;
+
+    color:white;
+
+    border:none;
+
+    border-radius:12px;
+
+    padding:10px 18px;
+
+}
+
+.btn-web:hover{
+
+    background:#00838F;
+
+}
+
+
+/* =======================================================
+BADGES
+======================================================= */
+
+.badge-pop{
+
+    display:inline-block;
+
+    padding:8px 15px;
+
+    border-radius:20px;
+
+    background:#E3F2FD;
+
+    color:#1565C0;
+
+    font-size:13px;
+
+    margin-right:8px;
+
+    margin-top:10px;
+
+}
+
+
+/* =======================================================
+PRECIO
+======================================================= */
+
+.precio{
+
+    font-size:26px;
+
+    font-weight:bold;
+
+    color:#2E7D32;
+
+    margin-top:15px;
+
+}
+
+
+/* =======================================================
+SECCIONES
+======================================================= */
+
+.titulo-seccion{
+
+    margin-top:35px;
+
+    margin-bottom:15px;
+
+    font-size:24px;
+
+    color:#1565C0;
+
+    font-weight:700;
+
+}
+
+
+/* =======================================================
 ANIMACIONES
-****************************/
+======================================================= */
 
-@keyframes fade{
+@keyframes aparecer{
 
-from{
+    from{
 
-opacity:0;
+        opacity:0;
 
-transform:translateY(20px);
+        transform:translateY(25px);
 
-}
+    }
 
-to{
+    to{
 
-opacity:1;
+        opacity:1;
 
-transform:translateY(0);
+        transform:translateY(0);
 
-}
-
-}
-
-.card{
-
-animation:fade .5s;
+    }
 
 }
 
-button:active{
+@keyframes typing{
 
-transform:scale(.97);
+    0%{
+
+        transform:translateY(0);
+
+        opacity:.4;
+
+    }
+
+    50%{
+
+        transform:translateY(-8px);
+
+        opacity:1;
+
+    }
+
+    100%{
+
+        transform:translateY(0);
+
+        opacity:.4;
+
+    }
 
 }
-/***************************
+
+
+/* =======================================================
 RESPONSIVE
-****************************/
+======================================================= */
 
-@media(max-width:1100px){
+@media(max-width:991px){
 
-.sidebar{
+.panel-left{
 
-width:320px;
-
-}
+    padding:15px;
 
 }
 
-@media(max-width:900px){
+.panel-right{
 
-.app{
-
-flex-direction:column;
-
-height:auto;
-
-overflow:auto;
-
-}
-
-.sidebar{
-
-width:100%;
-
-height:auto;
+    padding:10px;
 
 }
 
 .chat-container{
 
-height:calc(100vh - 520px);
+    height:auto;
+
+    min-height:70vh;
 
 }
 
-.chat-body{
+.burbuja{
 
-padding:20px;
-
-}
-
-.bubble{
-
-max-width:100%;
+    max-width:100%;
 
 }
 
-.logo{
+.card-imagen{
 
-justify-content:center;
-
-}
-
-.form-section{
-
-padding-bottom:25px;
+    height:180px;
 
 }
 
-}
+.botones{
 
-@media(max-width:600px){
-
-.chat-header{
-
-padding:15px;
+    flex-direction:column;
 
 }
 
-.sidebar{
+.btn-whatsapp,
 
-padding:20px;
+.btn-mapa,
 
-}
+.btn-web{
 
-.header-left span{
-
-font-size:18px;
-
-}
-
-.logo h1{
-
-font-size:22px;
-
-}
-
-.form-section button{
-
-font-size:16px;
+    width:100%;
 
 }
 

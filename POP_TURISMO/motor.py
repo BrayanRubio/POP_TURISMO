@@ -25,8 +25,18 @@ def cargar_json(ruta):
 
 def generar_recomendacion(datos):
 
-    idioma = datos.get("idioma", "Español")
+codigo_idioma = datos.get("idioma", "es")
 
+idiomas = {
+    "es": "Español",
+    "en": "English",
+    "fr": "Français",
+    "pt": "Português",
+    "de": "Deutsch",
+    "it": "Italiano"
+}
+
+idioma = idiomas.get(codigo_idioma, "Español")
     ciudad = datos.get("ciudad", "")
 
     presupuesto = datos.get("presupuesto", "Medio")
@@ -35,9 +45,8 @@ def generar_recomendacion(datos):
 
     intereses = datos.get("intereses", "")
 
-    dias = int(datos.get("dias", 1))
-
-    viajeros = int(datos.get("viajeros", 1))
+    dias = int(datos.get("dias") or 1)
+    viajeros = int(datos.get("viajeros") or 1)
 
     transporte = datos.get("transporte", "")
 

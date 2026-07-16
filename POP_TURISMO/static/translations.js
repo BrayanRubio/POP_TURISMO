@@ -1,6 +1,5 @@
 const translations = {
 
-    const translations = {
 
     //=========================================================
     // ESPAÑOL

@@ -126,7 +126,7 @@ def buscar_actividades(
             continue
 
         categoria = normalizar(
-            actividad.get("categoria", "")
+            actividad.get("tipo_actividad", "")
         )
 
         if interes not in categoria:

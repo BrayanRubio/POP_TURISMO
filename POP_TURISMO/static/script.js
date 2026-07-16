@@ -489,3 +489,89 @@ async function descargarPDF(){
     pdf.save("POP_Turismo.pdf");
 
 }
+
+// =======================================
+// CAMBIO DE IDIOMA
+// =======================================
+
+function cambiarIdioma() {
+
+    const idioma = document.getElementById("idioma").value;
+
+    const t = translations[idioma];
+
+    document.getElementById("titulo").textContent = t.titulo;
+    document.getElementById("subtitulo").textContent = t.subtitulo;
+    document.getElementById("planifica").textContent = t.planifica;
+
+    document.getElementById("lblIdioma").textContent = t.idioma;
+    document.getElementById("lblDestino").textContent = t.destino;
+    document.getElementById("lblLlegada").textContent = t.llegada;
+    document.getElementById("lblSalida").textContent = t.salida;
+    document.getElementById("lblTipo").textContent = t.tipo;
+    document.getElementById("lblPresupuesto").textContent = t.presupuesto;
+    document.getElementById("lblDias").textContent = t.dias;
+    document.getElementById("lblViajeros").textContent = t.viajeros;
+    document.getElementById("lblTransporte").textContent = t.transporte;
+    document.getElementById("lblActividad").textContent = t.actividad;
+
+    document.getElementById("txtGenerar").textContent = t.generar;
+    document.getElementById("txtNuevo").textContent = t.nuevo;
+    document.getElementById("txtPDF").textContent = t.pdf;
+// Traducir opciones de los select
+
+document.querySelectorAll("#tipo option").forEach((opcion, i) => {
+    opcion.textContent = t.tipos[i];
+});
+
+document.querySelectorAll("#presupuesto option").forEach((opcion, i) => {
+    opcion.textContent = t.presupuestos[i];
+});
+
+document.querySelectorAll("#transporte option").forEach((opcion, i) => {
+    opcion.textContent = t.transportes[i];
+});
+
+document.querySelectorAll("#intereses option").forEach((opcion, i) => {
+    opcion.textContent = t.intereses[i];
+});
+}
+document.getElementById("idioma").addEventListener("change", cambiarIdioma);
+window.addEventListener("DOMContentLoaded", () => {
+    cambiarIdioma();
+});
+
+// =======================================
+// CALCULAR DURACIÓN DEL VIAJE
+// =======================================
+
+const fechaInicio = document.getElementById("fecha_inicio");
+const fechaFin = document.getElementById("fecha_fin");
+const dias = document.getElementById("dias");
+
+function calcularDias() {
+
+    if (!fechaInicio.value || !fechaFin.value) {
+        dias.value = "";
+        return;
+    }
+
+    const inicio = new Date(fechaInicio.value);
+    const fin = new Date(fechaFin.value);
+
+    if (fin <= inicio) {
+        alert("La fecha de salida debe ser posterior a la fecha de llegada.");
+        dias.value = "";
+        fechaFin.value = "";
+        return;
+    }
+
+    const diferencia = fin - inicio;
+
+    const totalDias = Math.ceil(diferencia / (1000 * 60 * 60 * 24));
+
+    dias.value = totalDias;
+}
+
+fechaInicio.addEventListener("change", calcularDias);
+fechaFin.addEventListener("change", calcularDias);

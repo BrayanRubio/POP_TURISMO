@@ -1,32 +1,38 @@
+import unicodedata
 from datetime import datetime
-
 
 # ==========================================================
 # FUNCIONES AUXILIARES
 # ==========================================================
 
+def normalizar(texto):
+    """Quita tildes y pasa a minúsculas para comparar sin errores de acentos/mayúsculas."""
+    texto = texto.lower().strip()
+    texto = unicodedata.normalize("NFKD", texto)
+    texto = "".join(c for c in texto if not unicodedata.combining(c))
+    return texto
+
+
 def precio_valido(precio, presupuesto):
-
     presupuesto = presupuesto.lower()
-
     if presupuesto == "económico":
         return precio <= 200000
-
     elif presupuesto == "medio":
         return 200000 < precio <= 500000
-
     elif presupuesto == "alto":
         return precio > 500000
-
     return True
 
 
 def disponible(item, fecha_inicio, fecha_fin):
-
     if not fecha_inicio or not fecha_fin:
         return True
 
-    disponibilidad = item.get("disponibilidad", [])
+    disponibilidad = item.get("disponibilidad")
+
+    # Si el hotel no tiene datos de disponibilidad, no lo descartamos
+    if not disponibilidad:
+        return True
 
     return (
         fecha_inicio in disponibilidad and
@@ -46,12 +52,10 @@ def buscar_hoteles(
         fecha_fin):
 
     resultados = []
-
-    ciudad = ciudad.lower()
+    ciudad = normalizar(ciudad)
 
     for hotel in hoteles:
-
-        if hotel["ciudad"].lower() != ciudad:
+        if normalizar(hotel["ciudad"]) != ciudad:
             continue
 
         if not precio_valido(
@@ -87,13 +91,11 @@ def buscar_restaurantes(
         ciudad,
         presupuesto):
 
-    ciudad = ciudad.lower()
-
+    ciudad = normalizar(ciudad)
     resultados = []
 
     for restaurante in restaurantes:
-
-        if restaurante["ciudad"].lower() != ciudad:
+        if normalizar(restaurante["ciudad"]) != ciudad:
             continue
 
         resultados.append(restaurante)
@@ -115,21 +117,17 @@ def buscar_actividades(
         ciudad,
         interes):
 
-    ciudad = ciudad.lower()
-
-    interes = interes.lower()
-
+    ciudad = normalizar(ciudad)
+    interes = normalizar(interes)
     resultados = []
 
     for actividad in actividades:
-
-        if actividad["ciudad"].lower() != ciudad:
+        if normalizar(actividad["ciudad"]) != ciudad:
             continue
 
-        categoria = actividad.get(
-            "categoria",
-            ""
-        ).lower()
+        categoria = normalizar(
+            actividad.get("categoria", "")
+        )
 
         if interes not in categoria:
             continue

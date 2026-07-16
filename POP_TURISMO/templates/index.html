@@ -46,13 +46,12 @@
 
 </div>
 
-<h2>POP Turismo</h2>
-
-<p class="text-muted">
-
+<h2 id="titulo">POP Turismo</h2>
+<p class="text-muted" id="subtitulo">
 Tu asistente turístico inteligente
-
 </p>
+
+
 
 </div>
 
@@ -60,11 +59,9 @@ Tu asistente turístico inteligente
 
 <div class="card-body">
 
-<h5 class="mb-4">
-
-<i class="bi bi-sliders"></i>
-
-Planifica tu viaje
+<h5 class="mb-4" id="planifica">
+    Planifica tu viaje
+</h5>
 
 </h5>
 <!-- ========================= -->
@@ -75,11 +72,15 @@ Planifica tu viaje
 
     <label class="form-label">
 
-        <i class="bi bi-translate"></i>
+<i class="bi bi-translate"></i>
 
-        Idioma
+<span id="lblIdioma">
 
-    </label>
+Idioma
+
+</span>
+
+</label>
 
     <select id="idioma" class="form-select">
 
@@ -105,13 +106,11 @@ Planifica tu viaje
 <!-- Ciudad -->
 <!-- ========================= -->
 
-<div class="mb-3">
-
 <label class="form-label">
 
 <i class="bi bi-geo-alt-fill"></i>
 
-Destino
+<span id="lblDestino">Destino</span>
 
 </label>
 
@@ -159,6 +158,12 @@ class="form-select">
 
 Llegada
 
+<label class="form-label">
+
+    <i class="bi bi-calendar-event"></i>
+
+    <span id="lblLlegada">Llegada</span>
+
 </label>
 
 <input
@@ -174,8 +179,13 @@ class="form-control">
 
 Salida
 
-</label>
+<label class="form-label">
 
+    <i class="bi bi-calendar-check"></i>
+
+    <span id="lblSalida">Salida</span>
+
+</label>
 <input
 type="date"
 id="fecha_fin"
@@ -198,6 +208,12 @@ class="form-control">
 <i class="bi bi-airplane-fill"></i>
 
 Tipo de viaje
+
+<label class="form-label">
+
+    <i class="bi bi-airplane-fill"></i>
+
+    <span id="lblTipo">Tipo de viaje</span>
 
 </label>
 
@@ -235,8 +251,13 @@ class="form-select">
 
 Presupuesto
 
-</label>
+<label class="form-label">
 
+    <i class="bi bi-cash-stack"></i>
+
+    <span id="lblPresupuesto">Presupuesto</span>
+
+</label>
 <select
 id="presupuesto"
 class="form-select">
@@ -263,23 +284,15 @@ class="form-select">
 
 <i class="bi bi-calendar-week"></i>
 
-Número de días
+<span id="lblDias">Duración del viaje</span>
 
 </label>
 
 <input
-
-type="number"
-
+type="text"
 id="dias"
-
 class="form-control"
-
-value="3"
-
-min="1"
-
->
+readonly>
 
 </div>
 
@@ -297,8 +310,13 @@ min="1"
 
 Viajeros
 
-</label>
+<label class="form-label">
 
+    <i class="bi bi-people-fill"></i>
+
+    <span id="lblViajeros">Viajeros</span>
+
+</label>
 <input
 
 type="number"
@@ -329,8 +347,13 @@ min="1"
 
 Transporte
 
-</label>
+<label class="form-label">
 
+    <i class="bi bi-car-front-fill"></i>
+
+    <span id="lblTransporte">Transporte</span>
+
+</label>
 <select
 
 id="transporte"
@@ -365,8 +388,13 @@ class="form-select">
 
 Actividad principal
 
-</label>
+<label class="form-label">
 
+    <i class="bi bi-stars"></i>
+
+    <span id="lblActividad">Actividad principal</span>
+
+</label>
 <select
 
 id="intereses"
@@ -398,20 +426,25 @@ class="form-select">
 <div class="d-grid gap-2">
 
 <button
-
+id="btnGenerar"
 class="btn btn-primary btn-lg"
-
 onclick="consultar()">
-
 <i class="bi bi-send-fill"></i>
 
 Generar recomendaciones
 
-</button>
-
-
-
 <button
+id="btnGenerar"
+class="btn btn-primary btn-lg"
+onclick="consultar()">
+
+<i class="bi bi-send-fill"></i>
+
+<span id="txtGenerar">
+Generar recomendaciones
+</span>
+
+</button>
 
 class="btn btn-outline-secondary"
 
@@ -421,11 +454,18 @@ onclick="nuevoChat()">
 
 Nuevo chat
 
-</button>
-
-
-
 <button
+id="btnNuevo"
+class="btn btn-outline-secondary"
+onclick="nuevoChat()">
+
+<i class="bi bi-arrow-clockwise"></i>
+
+<span id="txtNuevo">
+Nuevo chat
+</span>
+
+</button>
 
 class="btn btn-success"
 
@@ -434,6 +474,17 @@ onclick="descargarPDF()">
 <i class="bi bi-file-earmark-pdf-fill"></i>
 
 Descargar guía
+
+<button
+id="btnPDF"
+class="btn btn-success"
+onclick="descargarPDF()">
+
+<i class="bi bi-file-earmark-pdf-fill"></i>
+
+<span id="txtPDF">
+Descargar guía
+</span>
 
 </button>
 
@@ -589,8 +640,9 @@ Descargar guía
 
 <!-- Script principal -->
 
-<script src="{{ url_for('static', filename='script.js') }}"></script>
+<script src="{{ url_for('static', filename='translations.js') }}"></script>
 
+<script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
 
 </html>

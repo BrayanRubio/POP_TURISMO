@@ -10,6 +10,10 @@ from buscador import (
 from generador import generar_mensaje
 
 
+# ======================================================
+# RUTAS
+# ======================================================
+
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 RUTA_HOTELES = os.path.join(BASE_DIR, "data", "hoteles.json")
@@ -17,26 +21,43 @@ RUTA_RESTAURANTES = os.path.join(BASE_DIR, "data", "restaurantes.json")
 RUTA_ACTIVIDADES = os.path.join(BASE_DIR, "data", "actividades.json")
 
 
+# ======================================================
+# CARGAR JSON
+# ======================================================
+
 def cargar_json(ruta):
 
     with open(ruta, encoding="utf-8") as archivo:
         return json.load(archivo)
 
 
+# ======================================================
+# GENERAR RECOMENDACIÓN
+# ======================================================
+
 def generar_recomendacion(datos):
 
-codigo_idioma = datos.get("idioma", "es")
+    # ------------------------------------------
+    # Código del idioma recibido desde el HTML
+    # ------------------------------------------
 
-idiomas = {
-    "es": "Español",
-    "en": "English",
-    "fr": "Français",
-    "pt": "Português",
-    "de": "Deutsch",
-    "it": "Italiano"
-}
+    codigo_idioma = datos.get("idioma", "es")
 
-idioma = idiomas.get(codigo_idioma, "Español")
+    idiomas = {
+        "es": "Spanish",
+        "en": "English",
+        "fr": "French",
+        "pt": "Portuguese",
+        "de": "German",
+        "it": "Italian"
+    }
+
+    idioma = idiomas.get(codigo_idioma, "Spanish")
+
+    # ------------------------------------------
+    # Datos del formulario
+    # ------------------------------------------
+
     ciudad = datos.get("ciudad", "")
 
     presupuesto = datos.get("presupuesto", "Medio")
@@ -46,6 +67,7 @@ idioma = idiomas.get(codigo_idioma, "Español")
     intereses = datos.get("intereses", "")
 
     dias = int(datos.get("dias") or 1)
+
     viajeros = int(datos.get("viajeros") or 1)
 
     transporte = datos.get("transporte", "")
@@ -54,7 +76,9 @@ idioma = idiomas.get(codigo_idioma, "Español")
 
     fecha_fin = datos.get("fecha_fin", "")
 
-
+    # ------------------------------------------
+    # Cargar bases
+    # ------------------------------------------
 
     hoteles_bd = cargar_json(RUTA_HOTELES)
 
@@ -62,49 +86,37 @@ idioma = idiomas.get(codigo_idioma, "Español")
 
     actividades_bd = cargar_json(RUTA_ACTIVIDADES)
 
-
+    # ------------------------------------------
+    # Buscar recomendaciones
+    # ------------------------------------------
 
     hoteles = buscar_hoteles(
-
         hoteles_bd,
-
         ciudad,
-
         presupuesto,
-
         fecha_inicio,
-
         fecha_fin
-
     )
-
-
 
     restaurantes = buscar_restaurantes(
-
         restaurantes_bd,
-
         ciudad,
-
         presupuesto
-
     )
-
-
 
     actividades = buscar_actividades(
-
         actividades_bd,
-
         ciudad,
-
         intereses
-
     )
 
-
+    # ------------------------------------------
+    # Generar mensaje con IA
+    # ------------------------------------------
 
     mensaje = generar_mensaje(
+
+        codigo_idioma=codigo_idioma,
 
         idioma=idioma,
 
@@ -130,7 +142,9 @@ idioma = idiomas.get(codigo_idioma, "Español")
 
     )
 
-
+    # ------------------------------------------
+    # Respuesta
+    # ------------------------------------------
 
     return {
 

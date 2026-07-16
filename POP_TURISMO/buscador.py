@@ -1,5 +1,4 @@
 import unicodedata
-from datetime import datetime
 
 # ==========================================================
 # FUNCIONES AUXILIARES
@@ -14,13 +13,17 @@ def normalizar(texto):
 
 
 def precio_valido(precio, presupuesto):
-    presupuesto = presupuesto.lower()
-    if presupuesto == "económico":
-        return precio <= 200000
+    """
+    Rangos ajustados a los precios reales de hoteles.json
+    (min 190.000 - max 445.000).
+    """
+    presupuesto = normalizar(presupuesto)
+    if presupuesto == "economico":
+        return precio <= 280000
     elif presupuesto == "medio":
-        return 200000 < precio <= 500000
+        return 280000 < precio <= 380000
     elif presupuesto == "alto":
-        return precio > 500000
+        return precio > 380000
     return True
 
 
@@ -38,6 +41,31 @@ def disponible(item, fecha_inicio, fecha_fin):
         fecha_inicio in disponibilidad and
         fecha_fin in disponibilidad
     )
+
+
+# ==========================================================
+# MAPA DE SINÓNIMOS: opción del select -> categorías reales
+# ==========================================================
+# Las opciones del <select id="intereses"> del HTML no coinciden
+# textualmente con los valores reales de "tipo_actividad" en
+# actividades.json, así que cada opción se traduce a la(s)
+# categoría(s) reales que debe buscar.
+
+SINONIMOS_INTERES = {
+    "playa": ["buceo", "nautico"],
+    "gastronomia": ["gastronomico"],
+    "cultura": ["cultural", "museo", "turismo religioso"],
+    "aventura": ["aventura", "deporte extremo"],
+    "vida nocturna": ["vida nocturna"],
+    "compras": ["artesanias"],
+    "naturaleza": ["ecoturismo", "senderismo"],
+    "historia": ["tour historico", "turismo religioso", "museo"],
+}
+
+
+def coincide_interes(interes_normalizado, categoria_normalizada):
+    terminos = SINONIMOS_INTERES.get(interes_normalizado, [interes_normalizado])
+    return any(termino in categoria_normalizada for termino in terminos)
 
 
 # ==========================================================
@@ -129,7 +157,7 @@ def buscar_actividades(
             actividad.get("tipo_actividad", "")
         )
 
-        if interes not in categoria:
+        if not coincide_interes(interes, categoria):
             continue
 
         resultados.append(actividad)

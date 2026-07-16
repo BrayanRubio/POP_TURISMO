@@ -511,4 +511,3 @@ const translations = {
 
 };
 
-};

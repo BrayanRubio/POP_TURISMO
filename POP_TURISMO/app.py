@@ -17,6 +17,13 @@ def recommend():
 
         datos = request.get_json()
 
+        # Validación básica
+        if not datos:
+            return jsonify({
+                "success": False,
+                "error": "No se recibieron datos."
+            }), 400
+
         resultado = generar_recomendacion(datos)
 
         return jsonify({
@@ -34,6 +41,8 @@ def recommend():
         })
 
     except Exception as e:
+
+        print(e)
 
         return jsonify({
 

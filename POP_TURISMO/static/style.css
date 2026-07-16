@@ -1,618 +1,400 @@
-/* ==========================================================
-   POP TURISMO V3
-========================================================== */
+<!DOCTYPE html>
+<html lang="es">
 
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
+<head>
 
-body{
+    <meta charset="UTF-8">
 
-    font-family:"Segoe UI",sans-serif;
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    background:#eef3f8;
+    <title>POP Turismo</title>
 
-    overflow:hidden;
+    <!-- Bootstrap -->
 
-}
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
 
+    <!-- Bootstrap Icons -->
 
-/*==========================================================
-    PANEL IZQUIERDO
-==========================================================*/
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
 
-.panel-left{
+    <!-- CSS -->
 
-    background:#ffffff;
+    <link rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}">
 
-    height:100vh;
+</head>
 
-    overflow-y:auto;
+<body>
 
-    padding:35px;
+<div class="container-fluid vh-100">
 
-    border-right:1px solid #dfe6ec;
+<div class="row h-100">
 
-}
+<!-- ===================================================== -->
+<!-- PANEL IZQUIERDO -->
+<!-- ===================================================== -->
 
+<div class="col-lg-4 panel-left">
 
-.logo img{
+<div class="logo text-center mb-4">
 
-    width:110px;
+<div class="text-center mb-3">
 
-}
+    <i class="bi bi-airplane-engines-fill"
+       style="font-size:70px;color:#0d6efd;"></i>
 
+</div>
 
-.logo h2{
+<h2 id="titulo">POP Turismo</h2>
+<p class="text-muted" id="subtitulo">
+Tu asistente turístico inteligente
+</p>
 
-    font-weight:700;
+</div>
 
-    color:#0d6efd;
+<div class="card shadow-sm border-0">
 
-}
+<div class="card-body">
 
+<h5 class="mb-4" id="planifica">
+    Planifica tu viaje
+</h5>
 
-.logo p{
+<!-- ========================= -->
+<!-- Idioma -->
+<!-- ========================= -->
 
-    color:#6c757d;
+<div class="mb-3">
 
-}
+    <label class="form-label">
+        <i class="bi bi-translate"></i>
+        <span id="lblIdioma">Idioma</span>
+    </label>
 
+    <select id="idioma" class="form-select">
+        <option value="es">🇪🇸 Español</option>
+        <option value="en">🇺🇸 English</option>
+        <option value="fr">🇫🇷 Français</option>
+        <option value="pt">🇧🇷 Português</option>
+        <option value="de">🇩🇪 Deutsch</option>
+        <option value="it">🇮🇹 Italiano</option>
+    </select>
 
-/*==========================================================
-    TARJETA FORMULARIO
-==========================================================*/
+</div>
 
-.card{
+<!-- ========================= -->
+<!-- Ciudad -->
+<!-- ========================= -->
 
-    border:none;
+<div class="mb-3">
 
-    border-radius:20px;
+    <label class="form-label">
+        <i class="bi bi-geo-alt-fill"></i>
+        <span id="lblDestino">Destino</span>
+    </label>
 
-    box-shadow:0 10px 30px rgba(0,0,0,.08);
+    <select id="ciudad" class="form-select">
+        <option value="">Seleccione una ciudad</option>
+        <option>Bogotá</option>
+        <option>Medellín</option>
+        <option>Cartagena</option>
+        <option>Santa Marta</option>
+        <option>San Andrés</option>
+        <option>Cali</option>
+        <option>Barranquilla</option>
+        <option>Bucaramanga</option>
+        <option>Pereira</option>
+        <option>Manizales</option>
+    </select>
 
-}
+</div>
 
+<!-- ========================= -->
+<!-- Fechas -->
+<!-- ========================= -->
 
-.card-body{
+<div class="row mb-3">
 
-    padding:30px;
+<div class="col">
 
-}
+<label class="form-label">
+    <i class="bi bi-calendar-event"></i>
+    <span id="lblLlegada">Llegada</span>
+</label>
 
+<input type="date" id="fecha_inicio" class="form-control">
 
-.form-label{
+</div>
 
-    font-weight:600;
+<div class="col">
 
-    margin-bottom:8px;
+<label class="form-label">
+    <i class="bi bi-calendar-check"></i>
+    <span id="lblSalida">Salida</span>
+</label>
 
-}
+<input type="date" id="fecha_fin" class="form-control">
 
+</div>
 
-.form-select,
-.form-control{
+</div>
 
-    border-radius:12px;
+<!-- ========================= -->
+<!-- Tipo de viaje -->
+<!-- ========================= -->
 
-    height:48px;
+<div class="mb-3">
 
-    border:1px solid #ced4da;
+    <label class="form-label">
+        <i class="bi bi-airplane-fill"></i>
+        <span id="lblTipo">Tipo de viaje</span>
+    </label>
 
-}
+    <select id="tipo" class="form-select">
+        <option>Vacaciones</option>
+        <option>Negocios</option>
+        <option>Familia</option>
+        <option>Mochilero</option>
+        <option>Romántico</option>
+        <option>Aventura</option>
+    </select>
 
+</div>
 
-.form-select:focus,
-.form-control:focus{
+<!-- ========================= -->
+<!-- Presupuesto -->
+<!-- ========================= -->
 
-    border-color:#0d6efd;
+<div class="mb-3">
 
-    box-shadow:0 0 0 .15rem rgba(13,110,253,.25);
+    <label class="form-label">
+        <i class="bi bi-cash-stack"></i>
+        <span id="lblPresupuesto">Presupuesto</span>
+    </label>
 
-}
+    <select id="presupuesto" class="form-select">
+        <option>Económico</option>
+        <option>Medio</option>
+        <option>Alto</option>
+    </select>
 
+</div>
 
-/*==========================================================
-    BOTONES
-==========================================================*/
+<!-- ========================= -->
+<!-- Días -->
+<!-- ========================= -->
 
-.btn{
+<div class="mb-3">
 
-    border-radius:14px;
+    <label class="form-label">
+        <i class="bi bi-calendar-week"></i>
+        <span id="lblDias">Duración del viaje</span>
+    </label>
 
-    height:50px;
+    <input type="text" id="dias" class="form-control" readonly>
 
-    font-weight:600;
+</div>
 
-    transition:.3s;
+<!-- ========================= -->
+<!-- Viajeros -->
+<!-- ========================= -->
 
-}
+<div class="mb-3">
 
+    <label class="form-label">
+        <i class="bi bi-people-fill"></i>
+        <span id="lblViajeros">Viajeros</span>
+    </label>
 
-.btn-primary{
+    <input type="number" id="viajeros" class="form-control" value="2" min="1">
 
-    background:#0d6efd;
+</div>
 
-}
+<!-- ========================= -->
+<!-- Transporte -->
+<!-- ========================= -->
 
+<div class="mb-3">
 
-.btn-primary:hover{
+    <label class="form-label">
+        <i class="bi bi-car-front-fill"></i>
+        <span id="lblTransporte">Transporte</span>
+    </label>
 
-    transform:translateY(-2px);
+    <select id="transporte" class="form-select">
+        <option>Vehículo propio</option>
+        <option>Transporte público</option>
+        <option>Taxi</option>
+        <option>Caminando</option>
+        <option>Bicicleta</option>
+    </select>
 
-}
+</div>
 
+<!-- ========================= -->
+<!-- Interés -->
+<!-- ========================= -->
 
-.btn-success:hover{
+<div class="mb-4">
 
-    transform:translateY(-2px);
+    <label class="form-label">
+        <i class="bi bi-stars"></i>
+        <span id="lblActividad">Actividad principal</span>
+    </label>
 
-}
+    <select id="intereses" class="form-select">
+        <option>Playa</option>
+        <option>Gastronomía</option>
+        <option>Cultura</option>
+        <option>Aventura</option>
+        <option>Vida nocturna</option>
+        <option>Compras</option>
+        <option>Naturaleza</option>
+        <option>Historia</option>
+    </select>
 
+</div>
 
-.btn-outline-secondary:hover{
+<div class="d-grid gap-2">
 
-    transform:translateY(-2px);
+    <button
+        class="btn btn-primary btn-lg"
+        onclick="consultar()">
+        <i class="bi bi-send-fill"></i>
+        <span id="txtGenerar">Generar recomendaciones</span>
+    </button>
 
-}
+    <button
+        id="btnNuevo"
+        class="btn btn-outline-secondary"
+        onclick="nuevoChat()">
+        <i class="bi bi-arrow-clockwise"></i>
+        <span id="txtNuevo">Nuevo chat</span>
+    </button>
 
+    <button
+        class="btn btn-success"
+        onclick="descargarPDF()">
+        <i class="bi bi-file-earmark-pdf-fill"></i>
+        <span id="txtPDF">Descargar guía</span>
+    </button>
 
-/*==========================================================
-    PANEL DERECHO
-==========================================================*/
+</div>
 
-.panel-right{
+</div>
 
-    background:#f4f7fb;
+</div>
 
-    height:100vh;
+</div>
 
-    display:flex;
+<!-- ===================================================== -->
+<!-- PANEL DERECHO -->
+<!-- ===================================================== -->
 
-    flex-direction:column;
+<div class="col-lg-8 panel-right">
 
-}
+    <div class="chat-container">
 
+        <!-- Encabezado -->
 
-.chat-container{
+        <div class="chat-header">
 
-    display:flex;
+            <div class="d-flex align-items-center">
 
-    flex-direction:column;
+                <img src="{{ url_for('static', filename='logo.png') }}"
+                     class="rounded-circle me-3"
+                     width="55"
+                     height="55">
 
-    height:100%;
+                <div>
 
-}
+                    <h4 class="mb-0">
+                        POP Turismo
+                    </h4>
 
+                    <small class="text-success">
+                        <i class="bi bi-circle-fill"></i>
+                        Asistente en línea
+                    </small>
 
-/*==========================================================
-    HEADER CHAT
-==========================================================*/
+                </div>
 
-.chat-header{
+            </div>
 
-    background:white;
+        </div>
 
-    padding:20px 35px;
+        <!-- Conversación -->
 
-    border-bottom:1px solid #dee2e6;
+        <div id="chat" class="chat-body">
 
-    box-shadow:0 3px 10px rgba(0,0,0,.04);
+            <!-- Mensaje inicial -->
 
-}
+            <div class="message bot">
 
+                <div class="avatar">
+                    🤖
+                </div>
 
-.chat-header h4{
+                <div class="bubble">
+                    ¡Hola!
+                    <br><br>
+                    Soy tu asistente turístico.
+                    <br><br>
+                    Completa la información del viaje y prepararé una guía personalizada con hoteles, restaurantes y actividades.
+                </div>
 
-    margin:0;
+            </div>
 
-    font-weight:700;
+        </div>
 
-}
+        <!-- Loader -->
 
+        <div
+            id="loader"
+            class="text-center my-4"
+            style="display:none;">
 
-.chat-header small{
+            <div class="spinner-border text-primary">
+            </div>
 
-    color:#198754;
+            <br><br>
 
-}
+            <strong>
+                Buscando las mejores recomendaciones...
+            </strong>
 
+        </div>
 
-/*==========================================================
-    CUERPO CHAT
-==========================================================*/
+        <!-- Tarjetas -->
 
-.chat-body{
+        <div
+            id="resultado"
+            class="mt-4">
+        </div>
 
-    flex:1;
+    </div>
 
-    overflow-y:auto;
+</div>
 
-    padding:35px;
+</div>
 
-}
-/*==========================================================
-    MENSAJES CHAT
-==========================================================*/
+</div>
 
-.message{
+<!-- ===================================================== -->
+<!-- Bootstrap -->
+<!-- ===================================================== -->
 
-    display:flex;
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
 
-    align-items:flex-start;
+<!-- PDF -->
 
-    margin-bottom:25px;
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
-    animation:fadeIn .4s ease;
+<!-- Script principal -->
 
-}
+<script src="{{ url_for('static', filename='translations.js') }}"></script>
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
 
-.message.user{
-
-    justify-content:flex-end;
-
-}
-
-.message.bot{
-
-    justify-content:flex-start;
-
-}
-
-
-/*==========================================================
-    AVATARES
-==========================================================*/
-
-.avatar{
-
-    width:48px;
-
-    height:48px;
-
-    border-radius:50%;
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    font-size:22px;
-
-    flex-shrink:0;
-
-    box-shadow:0 4px 10px rgba(0,0,0,.15);
-
-}
-
-.message.bot .avatar{
-
-    background:#0d6efd;
-
-    color:white;
-
-    margin-right:15px;
-
-}
-
-.message.user .avatar{
-
-    background:#198754;
-
-    color:white;
-
-    margin-left:15px;
-
-    order:2;
-
-}
-
-
-/*==========================================================
-    BURBUJAS
-==========================================================*/
-
-.bubble{
-
-    max-width:75%;
-
-    padding:18px 22px;
-
-    border-radius:20px;
-
-    line-height:1.7;
-
-    font-size:15px;
-
-    box-shadow:0 5px 18px rgba(0,0,0,.08);
-
-}
-
-.message.bot .bubble{
-
-    background:white;
-
-    color:#2c3e50;
-
-    border-top-left-radius:6px;
-
-}
-
-.message.user .bubble{
-
-    background:#0d6efd;
-
-    color:white;
-
-    border-top-right-radius:6px;
-
-}
-
-
-/*==========================================================
-    TARJETAS
-==========================================================*/
-
-.card-resultado{
-
-    background:white;
-
-    border-radius:20px;
-
-    overflow:hidden;
-
-    margin-top:25px;
-
-    box-shadow:0 10px 25px rgba(0,0,0,.08);
-
-    transition:.3s;
-
-}
-
-.card-resultado:hover{
-
-    transform:translateY(-6px);
-
-}
-
-.card-imagen{
-
-    width:100%;
-
-    height:220px;
-
-    object-fit:cover;
-
-}
-
-.card-contenido{
-
-    padding:22px;
-
-}
-
-.card-contenido h4{
-
-    font-size:20px;
-
-    font-weight:700;
-
-    margin-bottom:10px;
-
-    color:#2c3e50;
-
-}
-
-.card-contenido p{
-
-    margin-bottom:8px;
-
-    color:#6c757d;
-
-}
-
-.precio{
-
-    color:#198754;
-
-    font-size:22px;
-
-    font-weight:bold;
-
-}
-
-.estrellas{
-
-    color:#ffc107;
-
-    font-size:18px;
-
-    margin-bottom:12px;
-
-}
-
-
-/*==========================================================
-    BOTONES TARJETAS
-==========================================================*/
-
-.card-botones{
-
-    display:flex;
-
-    gap:10px;
-
-    flex-wrap:wrap;
-
-    margin-top:18px;
-
-}
-
-.card-botones .btn{
-
-    flex:1;
-
-    min-width:130px;
-
-}
-
-
-/*==========================================================
-    LOADER
-==========================================================*/
-
-#loader{
-
-    padding:35px;
-
-}
-
-.spinner-border{
-
-    width:3rem;
-
-    height:3rem;
-
-}
-
-
-/*==========================================================
-    SCROLL
-==========================================================*/
-
-.chat-body::-webkit-scrollbar{
-
-    width:10px;
-
-}
-
-.chat-body::-webkit-scrollbar-thumb{
-
-    background:#c9d1d9;
-
-    border-radius:20px;
-
-}
-
-.chat-body::-webkit-scrollbar-track{
-
-    background:#f8f9fa;
-
-}
-
-
-/*==========================================================
-    ANIMACIONES
-==========================================================*/
-
-@keyframes fadeIn{
-
-    from{
-
-        opacity:0;
-
-        transform:translateY(20px);
-
-    }
-
-    to{
-
-        opacity:1;
-
-        transform:translateY(0);
-
-    }
-
-}
-
-
-/*==========================================================
-    RESPONSIVE
-==========================================================*/
-
-@media(max-width:992px){
-
-    body{
-
-        overflow:auto;
-
-    }
-
-    .panel-left{
-
-        height:auto;
-
-        border-right:none;
-
-        border-bottom:1px solid #dee2e6;
-
-    }
-
-    .panel-right{
-
-        height:auto;
-
-    }
-
-    .chat-body{
-
-        padding:20px;
-
-    }
-
-    .bubble{
-
-        max-width:95%;
-
-    }
-
-    .card-imagen{
-
-        height:180px;
-
-    }
-
-}
-
-@media(max-width:576px){
-
-    .logo img{
-
-        width:80px;
-
-    }
-
-    .chat-header{
-
-        padding:15px;
-
-    }
-
-    .chat-header h4{
-
-        font-size:18px;
-
-    }
-
-    .card-contenido{
-
-        padding:18px;
-
-    }
-
-    .precio{
-
-        font-size:18px;
-
-    }
-
-    .card-botones{
-
-        flex-direction:column;
-
-    }
-
-}
+</html>

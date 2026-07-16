@@ -426,10 +426,13 @@ class="form-select">
 <div class="d-grid gap-2">
 
 <button
-id="btnGenerar"
-class="btn btn-primary btn-lg"
-onclick="consultar()">
-<i class="bi bi-send-fill"></i>
+    class="btn btn-primary btn-lg"
+    onclick="consultar()">
+
+    <i class="bi bi-send-fill"></i>
+    <span id="txtGenerar">Generar recomendaciones</span>
+
+</button>
 
 Generar recomendaciones
 
@@ -465,6 +468,13 @@ onclick="nuevoChat()">
 Nuevo chat
 </span>
 
+<button
+    class="btn btn-outline-secondary"
+    onclick="nuevoChat()">
+
+    <i class="bi bi-arrow-clockwise"></i>
+    <span id="txtNuevo">Nuevo chat</span>
+
 </button>
 
 class="btn btn-success"
@@ -476,9 +486,13 @@ onclick="descargarPDF()">
 Descargar guía
 
 <button
-id="btnPDF"
-class="btn btn-success"
-onclick="descargarPDF()">
+    class="btn btn-success"
+    onclick="descargarPDF()">
+
+    <i class="bi bi-file-earmark-pdf-fill"></i>
+    <span id="txtPDF">Descargar guía</span>
+
+</button>
 
 <i class="bi bi-file-earmark-pdf-fill"></i>
 

@@ -1,25 +1,9 @@
 from openai import OpenAI
 import os
 
-
 client = OpenAI(
     api_key=os.getenv("OPENAI_API_KEY")
 )
-
-
-# ===============================================
-# IDIOMAS SOPORTADOS
-# ===============================================
-
-IDIOMAS = {
-    "es": "Spanish",
-    "en": "English",
-    "fr": "French",
-    "pt": "Portuguese",
-    "de": "German",
-    "it": "Italian"
-}
-
 
 # ===============================================
 # MENSAJES DE RESPALDO
@@ -47,34 +31,43 @@ MENSAJES = {
 # ===============================================
 
 def generar_mensaje(
-    idioma,
-    ciudad,
-    tipo,
-    presupuesto,
-    dias,
-    viajeros,
-    transporte,
-    intereses,
-    hoteles,
-    restaurantes,
-    actividades
-):
 
-    idioma_prompt = IDIOMAS.get(
-        idioma,
-        "Spanish"
-    )
+    codigo_idioma,
+
+    idioma,
+
+    ciudad,
+
+    tipo,
+
+    presupuesto,
+
+    dias,
+
+    viajeros,
+
+    transporte,
+
+    intereses,
+
+    hoteles,
+
+    restaurantes,
+
+    actividades
+
+):
 
     prompt = f"""
 You are an expert tourism assistant for an airport digital kiosk.
 
 The traveler selected the language:
 
-{idioma_prompt}
+{idioma}
 
 IMPORTANT RULES
 
-Respond ONLY in {idioma_prompt}.
+Respond ONLY in {idioma}.
 
 Write naturally.
 
@@ -138,6 +131,6 @@ Generate only one welcoming paragraph inviting the traveler to explore the recom
         print(f"Error OpenAI: {e}")
 
         return MENSAJES.get(
-            idioma,
+            codigo_idioma,
             MENSAJES["es"]
         )

@@ -1,6 +1,13 @@
 const translations = {
 
+    const translations = {
+
+    //=========================================================
+    // ESPAÑOL
+    //=========================================================
+
     es: {
+
         titulo: "POP Turismo",
         subtitulo: "Tu asistente turístico inteligente",
         planifica: "Planifica tu viaje",
@@ -20,8 +27,27 @@ const translations = {
         nuevo: "Nuevo chat",
         pdf: "Descargar guía",
 
+        hoteles: "🏨 Alojamientos recomendados",
+        restaurantes: "🍽 Restaurantes",
+        actividades: "🎯 Actividades",
+
+        llamar: "📞 Llamar",
+        whatsapp: "💬 WhatsApp",
+        mapa: "📍 Mapa",
+
         chatBienvenida: "¡Hola!",
-        chatMensaje: "Soy tu asistente turístico. Completa la información del viaje y prepararé una guía personalizada con hoteles, restaurantes y actividades.",
+        chatMensaje:
+            "Soy tu asistente turístico. Completa la información del viaje y prepararé una guía personalizada con hoteles, restaurantes y actividades.",
+
+        errorServidor:
+            "Ocurrió un error al consultar el servidor.",
+
+        fechaError:
+            "La fecha de salida debe ser posterior a la fecha de llegada.",
+
+        pdfTitulo: "POP Turismo",
+
+        pdfSubtitulo: "Guía turística personalizada",
 
         tipos: [
             "Vacaciones",
@@ -56,9 +82,17 @@ const translations = {
             "Naturaleza",
             "Historia"
         ]
+
     },
 
+
+
+    //=========================================================
+    // ENGLISH
+    //=========================================================
+
     en: {
+
         titulo: "POP Tourism",
         subtitulo: "Your smart travel assistant",
         planifica: "Plan your trip",
@@ -78,8 +112,28 @@ const translations = {
         nuevo: "New chat",
         pdf: "Download guide",
 
+        hoteles: "🏨 Recommended Hotels",
+        restaurantes: "🍽 Restaurants",
+        actividades: "🎯 Activities",
+
+        llamar: "📞 Call",
+        whatsapp: "💬 WhatsApp",
+        mapa: "📍 Map",
+
         chatBienvenida: "Hello!",
-        chatMensaje: "I am your travel assistant. Complete your trip information and I will prepare a personalized guide with hotels, restaurants and activities.",
+
+        chatMensaje:
+            "I am your travel assistant. Complete your trip information and I will prepare a personalized guide with hotels, restaurants and activities.",
+
+        errorServidor:
+            "An error occurred while contacting the server.",
+
+        fechaError:
+            "Departure date must be later than arrival date.",
+
+        pdfTitulo: "POP Tourism",
+
+        pdfSubtitulo: "Personalized Travel Guide",
 
         tipos: [
             "Vacation",
@@ -114,9 +168,15 @@ const translations = {
             "Nature",
             "History"
         ]
+
     },
 
+        //=========================================================
+    // FRANÇAIS
+    //=========================================================
+
     fr: {
+
         titulo: "POP Tourisme",
         subtitulo: "Votre assistant touristique intelligent",
         planifica: "Planifiez votre voyage",
@@ -136,8 +196,28 @@ const translations = {
         nuevo: "Nouvelle discussion",
         pdf: "Télécharger le guide",
 
+        hoteles: "🏨 Hôtels recommandés",
+        restaurantes: "🍽 Restaurants",
+        actividades: "🎯 Activités",
+
+        llamar: "📞 Appeler",
+        whatsapp: "💬 WhatsApp",
+        mapa: "📍 Carte",
+
         chatBienvenida: "Bonjour !",
-        chatMensaje: "Je suis votre assistant touristique. Complétez les informations de votre voyage et je préparerai un guide personnalisé avec des hôtels, des restaurants et des activités.",
+
+        chatMensaje:
+            "Je suis votre assistant touristique. Complétez les informations de votre voyage et je préparerai un guide personnalisé avec des hôtels, des restaurants et des activités.",
+
+        errorServidor:
+            "Une erreur est survenue lors de la connexion au serveur.",
+
+        fechaError:
+            "La date de départ doit être postérieure à la date d'arrivée.",
+
+        pdfTitulo: "POP Tourisme",
+
+        pdfSubtitulo: "Guide touristique personnalisé",
 
         tipos: [
             "Vacances",
@@ -172,9 +252,17 @@ const translations = {
             "Nature",
             "Histoire"
         ]
+
     },
 
+
+
+    //=========================================================
+    // PORTUGUÊS
+    //=========================================================
+
     pt: {
+
         titulo: "POP Turismo",
         subtitulo: "Seu assistente turístico inteligente",
         planifica: "Planeje sua viagem",
@@ -194,8 +282,28 @@ const translations = {
         nuevo: "Novo chat",
         pdf: "Baixar guia",
 
+        hoteles: "🏨 Hotéis recomendados",
+        restaurantes: "🍽 Restaurantes",
+        actividades: "🎯 Atividades",
+
+        llamar: "📞 Ligar",
+        whatsapp: "💬 WhatsApp",
+        mapa: "📍 Mapa",
+
         chatBienvenida: "Olá!",
-        chatMensaje: "Sou seu assistente turístico. Complete as informações da viagem e prepararei um guia personalizado com hotéis, restaurantes e atividades.",
+
+        chatMensaje:
+            "Sou seu assistente turístico. Complete as informações da viagem e prepararei um guia personalizado com hotéis, restaurantes e atividades.",
+
+        errorServidor:
+            "Ocorreu um erro ao consultar o servidor.",
+
+        fechaError:
+            "A data de saída deve ser posterior à data de chegada.",
+
+        pdfTitulo: "POP Turismo",
+
+        pdfSubtitulo: "Guia turístico personalizado",
 
         tipos: [
             "Férias",
@@ -230,9 +338,14 @@ const translations = {
             "Natureza",
             "História"
         ]
+
     },
+       //=========================================================
+    // DEUTSCH
+    //=========================================================
 
     de: {
+
         titulo: "POP Tourismus",
         subtitulo: "Ihr intelligenter Reiseassistent",
         planifica: "Reise planen",
@@ -252,8 +365,28 @@ const translations = {
         nuevo: "Neuer Chat",
         pdf: "Reiseführer herunterladen",
 
+        hoteles: "🏨 Empfohlene Hotels",
+        restaurantes: "🍽 Restaurants",
+        actividades: "🎯 Aktivitäten",
+
+        llamar: "📞 Anrufen",
+        whatsapp: "💬 WhatsApp",
+        mapa: "📍 Karte",
+
         chatBienvenida: "Hallo!",
-        chatMensaje: "Ich bin Ihr Reiseassistent. Geben Sie Ihre Reisedaten ein und ich erstelle einen persönlichen Reiseführer mit Hotels, Restaurants und Aktivitäten.",
+
+        chatMensaje:
+            "Ich bin Ihr Reiseassistent. Geben Sie Ihre Reisedaten ein und ich erstelle einen persönlichen Reiseführer mit Hotels, Restaurants und Aktivitäten.",
+
+        errorServidor:
+            "Beim Verbinden mit dem Server ist ein Fehler aufgetreten.",
+
+        fechaError:
+            "Das Abreisedatum muss nach dem Anreisedatum liegen.",
+
+        pdfTitulo: "POP Tourismus",
+
+        pdfSubtitulo: "Personalisierter Reiseführer",
 
         tipos: [
             "Urlaub",
@@ -288,9 +421,17 @@ const translations = {
             "Natur",
             "Geschichte"
         ]
+
     },
 
+
+
+    //=========================================================
+    // ITALIANO
+    //=========================================================
+
     it: {
+
         titulo: "POP Turismo",
         subtitulo: "Il tuo assistente turistico intelligente",
         planifica: "Pianifica il viaggio",
@@ -310,8 +451,28 @@ const translations = {
         nuevo: "Nuova chat",
         pdf: "Scarica guida",
 
+        hoteles: "🏨 Hotel consigliati",
+        restaurantes: "🍽 Ristoranti",
+        actividades: "🎯 Attività",
+
+        llamar: "📞 Chiama",
+        whatsapp: "💬 WhatsApp",
+        mapa: "📍 Mappa",
+
         chatBienvenida: "Ciao!",
-        chatMensaje: "Sono il tuo assistente turistico. Inserisci i dettagli del viaggio e preparerò una guida personalizzata con hotel, ristoranti e attività.",
+
+        chatMensaje:
+            "Sono il tuo assistente turistico. Inserisci i dettagli del viaggio e preparerò una guida personalizzata con hotel, ristoranti e attività.",
+
+        errorServidor:
+            "Si è verificato un errore durante la connessione al server.",
+
+        fechaError:
+            "La data di partenza deve essere successiva alla data di arrivo.",
+
+        pdfTitulo: "POP Turismo",
+
+        pdfSubtitulo: "Guida turistica personalizzata",
 
         tipos: [
             "Vacanza",
@@ -346,6 +507,9 @@ const translations = {
             "Natura",
             "Storia"
         ]
+
     }
+
+};
 
 };

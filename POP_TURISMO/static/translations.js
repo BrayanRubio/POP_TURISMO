@@ -1,415 +1,351 @@
 const translations = {
 
     es: {
-
         titulo: "POP Turismo",
-
         subtitulo: "Tu asistente turístico inteligente",
-
         planifica: "Planifica tu viaje",
 
         idioma: "Idioma",
-
         destino: "Destino",
-
         llegada: "Llegada",
-
         salida: "Salida",
-
         tipo: "Tipo de viaje",
-
         presupuesto: "Presupuesto",
-
+        dias: "Duración del viaje",
         viajeros: "Viajeros",
-
         transporte: "Transporte",
-
         actividad: "Actividad principal",
 
         generar: "Generar recomendaciones",
-
         nuevo: "Nuevo chat",
+        pdf: "Descargar guía",
 
-        pdf: "Descargar guía"
+        chatBienvenida: "¡Hola!",
+        chatMensaje: "Soy tu asistente turístico. Completa la información del viaje y prepararé una guía personalizada con hoteles, restaurantes y actividades.",
+
         tipos: [
-    "Vacaciones",
-    "Negocios",
-    "Familia",
-    "Mochilero",
-    "Romántico",
-    "Aventura"
-],
+            "Vacaciones",
+            "Negocios",
+            "Familia",
+            "Mochilero",
+            "Romántico",
+            "Aventura"
+        ],
 
-presupuestos: [
-    "Económico",
-    "Medio",
-    "Alto"
-],
+        presupuestos: [
+            "Económico",
+            "Medio",
+            "Alto"
+        ],
 
-transportes: [
-    "Vehículo propio",
-    "Transporte público",
-    "Taxi",
-    "Caminando",
-    "Bicicleta"
-],
+        transportes: [
+            "Vehículo propio",
+            "Transporte público",
+            "Taxi",
+            "Caminando",
+            "Bicicleta"
+        ],
 
-intereses: [
-    "Playa",
-    "Gastronomía",
-    "Cultura",
-    "Aventura",
-    "Vida nocturna",
-    "Compras",
-    "Naturaleza",
-    "Historia"
-]
-
+        intereses: [
+            "Playa",
+            "Gastronomía",
+            "Cultura",
+            "Aventura",
+            "Vida nocturna",
+            "Compras",
+            "Naturaleza",
+            "Historia"
+        ]
     },
 
     en: {
-
         titulo: "POP Tourism",
-
         subtitulo: "Your smart travel assistant",
-
         planifica: "Plan your trip",
 
         idioma: "Language",
-
         destino: "Destination",
-
         llegada: "Arrival",
-
         salida: "Departure",
-
         tipo: "Trip type",
-
         presupuesto: "Budget",
-
+        dias: "Trip duration",
         viajeros: "Travelers",
-
         transporte: "Transportation",
-
         actividad: "Main activity",
 
         generar: "Generate recommendations",
-
         nuevo: "New chat",
+        pdf: "Download guide",
 
-        pdf: "Download guide"
+        chatBienvenida: "Hello!",
+        chatMensaje: "I am your travel assistant. Complete your trip information and I will prepare a personalized guide with hotels, restaurants and activities.",
+
         tipos: [
-    "Vacation",
-    "Business",
-    "Family",
-    "Backpacker",
-    "Romantic",
-    "Adventure"
-],
+            "Vacation",
+            "Business",
+            "Family",
+            "Backpacker",
+            "Romantic",
+            "Adventure"
+        ],
 
-presupuestos: [
-    "Low",
-    "Medium",
-    "High"
-],
+        presupuestos: [
+            "Low",
+            "Medium",
+            "High"
+        ],
 
-transportes: [
-    "Private vehicle",
-    "Public transport",
-    "Taxi",
-    "Walking",
-    "Bicycle"
-],
+        transportes: [
+            "Private vehicle",
+            "Public transport",
+            "Taxi",
+            "Walking",
+            "Bicycle"
+        ],
 
-intereses: [
-    "Beach",
-    "Gastronomy",
-    "Culture",
-    "Adventure",
-    "Nightlife",
-    "Shopping",
-    "Nature",
-    "History"
-]
-
+        intereses: [
+            "Beach",
+            "Gastronomy",
+            "Culture",
+            "Adventure",
+            "Nightlife",
+            "Shopping",
+            "Nature",
+            "History"
+        ]
     },
 
     fr: {
+        titulo: "POP Tourisme",
+        subtitulo: "Votre assistant touristique intelligent",
+        planifica: "Planifiez votre voyage",
 
-    titulo: "POP Tourisme",
+        idioma: "Langue",
+        destino: "Destination",
+        llegada: "Arrivée",
+        salida: "Départ",
+        tipo: "Type de voyage",
+        presupuesto: "Budget",
+        dias: "Durée du voyage",
+        viajeros: "Voyageurs",
+        transporte: "Transport",
+        actividad: "Activité principale",
 
-    subtitulo: "Votre assistant touristique intelligent",
+        generar: "Générer des recommandations",
+        nuevo: "Nouvelle discussion",
+        pdf: "Télécharger le guide",
 
-    planifica: "Planifiez votre voyage",
+        chatBienvenida: "Bonjour !",
+        chatMensaje: "Je suis votre assistant touristique. Complétez les informations de votre voyage et je préparerai un guide personnalisé avec des hôtels, des restaurants et des activités.",
 
-    idioma: "Langue",
+        tipos: [
+            "Vacances",
+            "Affaires",
+            "Famille",
+            "Sac à dos",
+            "Romantique",
+            "Aventure"
+        ],
 
-    destino: "Destination",
+        presupuestos: [
+            "Économique",
+            "Moyen",
+            "Élevé"
+        ],
 
-    llegada: "Arrivée",
+        transportes: [
+            "Véhicule personnel",
+            "Transport public",
+            "Taxi",
+            "À pied",
+            "Vélo"
+        ],
 
-    salida: "Départ",
+        intereses: [
+            "Plage",
+            "Gastronomie",
+            "Culture",
+            "Aventure",
+            "Vie nocturne",
+            "Shopping",
+            "Nature",
+            "Histoire"
+        ]
+    },
 
-    tipo: "Type de voyage",
+    pt: {
+        titulo: "POP Turismo",
+        subtitulo: "Seu assistente turístico inteligente",
+        planifica: "Planeje sua viagem",
 
-    presupuesto: "Budget",
+        idioma: "Idioma",
+        destino: "Destino",
+        llegada: "Chegada",
+        salida: "Saída",
+        tipo: "Tipo de viagem",
+        presupuesto: "Orçamento",
+        dias: "Duração da viagem",
+        viajeros: "Viajantes",
+        transporte: "Transporte",
+        actividad: "Atividade principal",
 
-    dias: "Durée du voyage",
+        generar: "Gerar recomendações",
+        nuevo: "Novo chat",
+        pdf: "Baixar guia",
 
-    viajeros: "Voyageurs",
+        chatBienvenida: "Olá!",
+        chatMensaje: "Sou seu assistente turístico. Complete as informações da viagem e prepararei um guia personalizado com hotéis, restaurantes e atividades.",
 
-    transporte: "Transport",
+        tipos: [
+            "Férias",
+            "Negócios",
+            "Família",
+            "Mochileiro",
+            "Romântico",
+            "Aventura"
+        ],
 
-    actividad: "Activité principale",
+        presupuestos: [
+            "Econômico",
+            "Médio",
+            "Alto"
+        ],
 
-    generar: "Générer des recommandations",
+        transportes: [
+            "Veículo próprio",
+            "Transporte público",
+            "Táxi",
+            "Caminhando",
+            "Bicicleta"
+        ],
 
-    nuevo: "Nouvelle discussion",
-
-    pdf: "Télécharger le guide",
-
-    tipos: [
-        "Vacances",
-        "Affaires",
-        "Famille",
-        "Sac à dos",
-        "Romantique",
-        "Aventure"
-    ],
-
-    presupuestos: [
-        "Économique",
-        "Moyen",
-        "Élevé"
-    ],
-
-    transportes: [
-        "Véhicule personnel",
-        "Transport public",
-        "Taxi",
-        "À pied",
-        "Vélo"
-    ],
-
-    intereses: [
-        "Plage",
-        "Gastronomie",
-        "Culture",
-        "Aventure",
-        "Vie nocturne",
-        "Shopping",
-        "Nature",
-        "Histoire"
-    ]
-
-},
-
-  pt: {
-
-    titulo: "POP Turismo",
-
-    subtitulo: "Seu assistente turístico inteligente",
-
-    planifica: "Planeje sua viagem",
-
-    idioma: "Idioma",
-
-    destino: "Destino",
-
-    llegada: "Chegada",
-
-    salida: "Saída",
-
-    tipo: "Tipo de viagem",
-
-    presupuesto: "Orçamento",
-
-    dias: "Duração da viagem",
-
-    viajeros: "Viajantes",
-
-    transporte: "Transporte",
-
-    actividad: "Atividade principal",
-
-    generar: "Gerar recomendações",
-
-    nuevo: "Novo chat",
-
-    pdf: "Baixar guia",
-
-    tipos: [
-        "Férias",
-        "Negócios",
-        "Família",
-        "Mochileiro",
-        "Romântico",
-        "Aventura"
-    ],
-
-    presupuestos: [
-        "Econômico",
-        "Médio",
-        "Alto"
-    ],
-
-    transportes: [
-        "Veículo próprio",
-        "Transporte público",
-        "Táxi",
-        "Caminhando",
-        "Bicicleta"
-    ],
-
-    intereses: [
-        "Praia",
-        "Gastronomia",
-        "Cultura",
-        "Aventura",
-        "Vida noturna",
-        "Compras",
-        "Natureza",
-        "História"
-    ]
-
-},
+        intereses: [
+            "Praia",
+            "Gastronomia",
+            "Cultura",
+            "Aventura",
+            "Vida noturna",
+            "Compras",
+            "Natureza",
+            "História"
+        ]
+    },
 
     de: {
+        titulo: "POP Tourismus",
+        subtitulo: "Ihr intelligenter Reiseassistent",
+        planifica: "Reise planen",
 
-    titulo: "POP Tourismus",
+        idioma: "Sprache",
+        destino: "Reiseziel",
+        llegada: "Anreise",
+        salida: "Abreise",
+        tipo: "Reiseart",
+        presupuesto: "Budget",
+        dias: "Reisedauer",
+        viajeros: "Reisende",
+        transporte: "Transport",
+        actividad: "Hauptaktivität",
 
-    subtitulo: "Ihr intelligenter Reiseassistent",
+        generar: "Empfehlungen erstellen",
+        nuevo: "Neuer Chat",
+        pdf: "Reiseführer herunterladen",
 
-    planifica: "Reise planen",
+        chatBienvenida: "Hallo!",
+        chatMensaje: "Ich bin Ihr Reiseassistent. Geben Sie Ihre Reisedaten ein und ich erstelle einen persönlichen Reiseführer mit Hotels, Restaurants und Aktivitäten.",
 
-    idioma: "Sprache",
+        tipos: [
+            "Urlaub",
+            "Geschäftsreise",
+            "Familie",
+            "Rucksackreise",
+            "Romantisch",
+            "Abenteuer"
+        ],
 
-    destino: "Reiseziel",
+        presupuestos: [
+            "Niedrig",
+            "Mittel",
+            "Hoch"
+        ],
 
-    llegada: "Anreise",
+        transportes: [
+            "Eigenes Fahrzeug",
+            "Öffentliche Verkehrsmittel",
+            "Taxi",
+            "Zu Fuß",
+            "Fahrrad"
+        ],
 
-    salida: "Abreise",
+        intereses: [
+            "Strand",
+            "Gastronomie",
+            "Kultur",
+            "Abenteuer",
+            "Nachtleben",
+            "Einkaufen",
+            "Natur",
+            "Geschichte"
+        ]
+    },
 
-    tipo: "Reiseart",
+    it: {
+        titulo: "POP Turismo",
+        subtitulo: "Il tuo assistente turistico intelligente",
+        planifica: "Pianifica il viaggio",
 
-    presupuesto: "Budget",
+        idioma: "Lingua",
+        destino: "Destinazione",
+        llegada: "Arrivo",
+        salida: "Partenza",
+        tipo: "Tipo di viaggio",
+        presupuesto: "Budget",
+        dias: "Durata del viaggio",
+        viajeros: "Viaggiatori",
+        transporte: "Trasporto",
+        actividad: "Attività principale",
 
-    dias: "Reisedauer",
+        generar: "Genera consigli",
+        nuevo: "Nuova chat",
+        pdf: "Scarica guida",
 
-    viajeros: "Reisende",
+        chatBienvenida: "Ciao!",
+        chatMensaje: "Sono il tuo assistente turistico. Inserisci i dettagli del viaggio e preparerò una guida personalizzata con hotel, ristoranti e attività.",
 
-    transporte: "Transport",
+        tipos: [
+            "Vacanza",
+            "Affari",
+            "Famiglia",
+            "Zaino in spalla",
+            "Romantico",
+            "Avventura"
+        ],
 
-    actividad: "Hauptaktivität",
+        presupuestos: [
+            "Economico",
+            "Medio",
+            "Alto"
+        ],
 
-    generar: "Empfehlungen erstellen",
+        transportes: [
+            "Veicolo privato",
+            "Trasporto pubblico",
+            "Taxi",
+            "A piedi",
+            "Bicicletta"
+        ],
 
-    nuevo: "Neuer Chat",
+        intereses: [
+            "Spiaggia",
+            "Gastronomia",
+            "Cultura",
+            "Avventura",
+            "Vita notturna",
+            "Shopping",
+            "Natura",
+            "Storia"
+        ]
+    }
 
-    pdf: "Reiseführer herunterladen",
-
-    tipos: [
-        "Urlaub",
-        "Geschäftsreise",
-        "Familie",
-        "Rucksackreise",
-        "Romantisch",
-        "Abenteuer"
-    ],
-
-    presupuestos: [
-        "Niedrig",
-        "Mittel",
-        "Hoch"
-    ],
-
-    transportes: [
-        "Eigenes Fahrzeug",
-        "Öffentliche Verkehrsmittel",
-        "Taxi",
-        "Zu Fuß",
-        "Fahrrad"
-    ],
-
-    intereses: [
-        "Strand",
-        "Gastronomie",
-        "Kultur",
-        "Abenteuer",
-        "Nachtleben",
-        "Einkaufen",
-        "Natur",
-        "Geschichte"
-    ]
-
-},
-
-   it: {
-
-    titulo: "POP Turismo",
-
-    subtitulo: "Il tuo assistente turistico intelligente",
-
-    planifica: "Pianifica il viaggio",
-
-    idioma: "Lingua",
-
-    destino: "Destinazione",
-
-    llegada: "Arrivo",
-
-    salida: "Partenza",
-
-    tipo: "Tipo di viaggio",
-
-    presupuesto: "Budget",
-
-    dias: "Durata del viaggio",
-
-    viajeros: "Viaggiatori",
-
-    transporte: "Trasporto",
-
-    actividad: "Attività principale",
-
-    generar: "Genera consigli",
-
-    nuevo: "Nuova chat",
-
-    pdf: "Scarica guida",
-
-    tipos: [
-        "Vacanza",
-        "Affari",
-        "Famiglia",
-        "Zaino in spalla",
-        "Romantico",
-        "Avventura"
-    ],
-
-    presupuestos: [
-        "Economico",
-        "Medio",
-        "Alto"
-    ],
-
-    transportes: [
-        "Veicolo privato",
-        "Trasporto pubblico",
-        "Taxi",
-        "A piedi",
-        "Bicicletta"
-    ],
-
-    intereses: [
-        "Spiaggia",
-        "Gastronomia",
-        "Cultura",
-        "Avventura",
-        "Vita notturna",
-        "Shopping",
-        "Natura",
-        "Storia"
-    ]
-
-},
+};

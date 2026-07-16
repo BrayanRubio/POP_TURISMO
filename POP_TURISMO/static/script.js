@@ -206,8 +206,6 @@ function crearHoteles(hoteles) {
 
         <div class="card-resultado">
 
-            
-
             <div class="card-contenido">
 
                 <h4>${hotel.nombre}</h4>
@@ -296,8 +294,6 @@ function crearRestaurantes(restaurantes){
 
         <div class="card-resultado">
 
-            
-
             <div class="card-contenido">
 
                 <h4>${restaurante.nombre}</h4>
@@ -308,13 +304,7 @@ function crearRestaurantes(restaurantes){
 
                 </div>
 
-                <p>
-
-                    🍴 ${restaurante.tipo_comida}
-
-                </p>
-
-                <p>
+<p>
 
                     📍 ${restaurante.direccion}
 
@@ -328,7 +318,7 @@ function crearRestaurantes(restaurantes){
 
                         class="btn btn-primary">
 
-                        📞
+                        📞 Llamar
 
                     </a>
 
@@ -340,7 +330,7 @@ function crearRestaurantes(restaurantes){
 
                         target="_blank">
 
-                        💬
+                        💬 WhatsApp
 
                     </a>
 
@@ -381,8 +371,6 @@ function crearActividades(actividades){
         resultado.innerHTML += `
 
         <div class="card-resultado">
-
-            
 
             <div class="card-contenido">
 

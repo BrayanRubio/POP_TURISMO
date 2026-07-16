@@ -206,9 +206,7 @@ function crearHoteles(hoteles) {
 
         <div class="card-resultado">
 
-            <img
-                src="/static/img/hoteles/${hotel.imagen}"
-                class="card-imagen">
+            
 
             <div class="card-contenido">
 
@@ -298,11 +296,7 @@ function crearRestaurantes(restaurantes){
 
         <div class="card-resultado">
 
-            <img
-
-                src="/static/img/restaurantes/${restaurante.imagen}"
-
-                class="card-imagen">
+            
 
             <div class="card-contenido">
 
@@ -388,11 +382,7 @@ function crearActividades(actividades){
 
         <div class="card-resultado">
 
-            <img
-
-                src="/static/img/actividades/${actividad.imagen}"
-
-                class="card-imagen">
+            
 
             <div class="card-contenido">
 
